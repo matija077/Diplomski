@@ -4,20 +4,49 @@ var Dash = require('Dash');
 
 const clientOps = {
     network: 'testnet',
+    wallet: {
+        mnemonic: null,
+    },
 };
 
 var client = new Dash.Client(clientOps);
 
 async function connect() {
+    var actualClient;
+
     try {
-        //await Promise.all([client.getDAPIClient(), client.getWalletAccount()])
-        var actualClient = client.getDAPIClient();
-        //var bestBlockHash = actualClient.getBestBlockHash();
-        console.log(actualClient);
-       // console.log(bestBlockHash);
+        var actualClient = await client.getDAPIClient();
     } catch(error) {
         console.log(error);
     }
+
+    return actualClient;
 }
 
-connect();
+async function createWallet() {
+    var wallet;
+
+    try {
+        wallet = await client.wallet.getAccount();
+    } catch(error) {
+        console.log(error);
+    }
+
+    return wallet;
+}
+
+var actualClient;
+var wallet;
+
+Promise.all([connect(), createWallet()])
+    .then(function resolved(results) {
+        actualClient = results[0];
+        wallet = results[1];
+    })
+    .catch(function rejected(reason) {
+        console.log(reason);
+    })
+    .finally(function final() {
+        console.log(actualClient);
+        console.log(wallet);
+});
