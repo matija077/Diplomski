@@ -1,0 +1,29 @@
+{
+  "name": "kickstart-for-students",
+  "version": "1.0.0",
+  "description": "kickstart for students using Dash",
+  "main": "index.js",
+  "dependencies": {
+    "dash": "^3.13.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matija077/Diplomski.git"
+  },
+  "keywords": [
+    "JS",
+    "JavaScript",
+    "Node",
+    "Dash"
+  ],
+  "author": "Matija Prša",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/matija077/Diplomski/issues"
+  },
+  "homepage": "https://github.com/matija077/Diplomski#readme"
+}
