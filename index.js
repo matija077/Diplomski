@@ -1,4 +1,6 @@
 var Dash = require('Dash');
+var fs = require('fs');
+
 
 //console.log(Dash);
 
@@ -9,7 +11,8 @@ const clientOps = {
         mnemonic: 'waste hawk artist palm label govern slim camp among soda mimic whale',
     },
 };
-//ybePQfwd636NAYzMrHxsk4HZLS74aKPTjJ
+// adress ybePQfwd636NAYzMrHxsk4HZLS74aKPTjJ
+// identity id ZWbiYYM2BuC92eDsF186kqMTnQiQcjNg3QQmKN2Mhbv
 
 const clientOps2 = {
     network: 'testnet',
@@ -17,7 +20,8 @@ const clientOps2 = {
         mnemonic: 'net mechanic visual various skin remove stool merit dog invite ready shoulder',
     },
 };
-// ybKetMrbXDBKLrfqA4iLf48bR5CfFrmw1m
+// adress ybKetMrbXDBKLrfqA4iLf48bR5CfFrmw1m
+// identitydi 21v59PWxENZXL4hnb1PTRMDibQt3fQ5t9DwyyycsG16f
 
 // use this to get dash http://faucet.evonet.networks.dash.org/
 
@@ -92,14 +96,25 @@ async function createIdentity(client) {
         const platform = client.platform;
         //console.log(platform);
         identity = await platform.identities.register();
-        //console.log({identity});
+        //return identity;
   } catch (e) {
         console.error('Something went wrong:', e);
   } finally {
         //client.disconnect();
   }
 
+  console.log('balbal');
   return identity;
+}
+
+async function topUpIdentity(identityId, amount, client) {
+    try {
+        const status = await client.platform.identities.topUp(identityId, amount);
+        const identity = await client.platform.identities.get(identityId);
+        console.log(identity.balance);
+    } catch(error) {
+        console.log(error);
+    }
 }
 
 var first = {};
@@ -139,12 +154,13 @@ Promise.all([createOneWallet(client), createOneWallet(client2)])
                 transaction = result;
                 console.log(transaction);
         });*/
-        /*console.log(first);
-        console.log(second);*/
+        //console.log(first.client.platform.identities);
+        //console.log(second);
 
-        createIdentity(first.client).then(
+        /*createIdentity(first.client).then(
             function(result) {
                 first.identity = result;
+                first.identityId = first.ide
                 console.log(first.identity);
             }
         );
@@ -153,7 +169,23 @@ Promise.all([createOneWallet(client), createOneWallet(client2)])
                 second.identity = result;
                 console.log(second.identity);
             }
+        );*/
+
+        fs.writeFile('first.txt', first.toString(), (err) => console.log(err));
+
+        // TODO get identity
+        first.identity = first.client.platform.identities.get('ZWbiYYM2BuC92eDsF186kqMTnQiQcjNg3QQmKN2Mhbv').then(
+            function getIdentity(result) {
+                console.log(result);
+            }
         );
+        second.identity = second.client.platform.identities.get('21v59PWxENZXL4hnb1PTRMDibQt3fQ5t9DwyyycsG16f').then(
+            function getIdentity(result) {
+                console.log(result);
+            }
+        );
+
+        //topUpIdentity('ZWbiYYM2BuC92eDsF186kqMTnQiQcjNg3QQmKN2Mhbv', 2000, first.client);
 
         console.log(first.account.getTotalBalance());
         console.log(second.account.getTotalBalance());
