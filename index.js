@@ -1,9 +1,6 @@
 var Dash = require('Dash');
 var fs = require('fs');
 
-
-//console.log(Dash);
-
 // menmoni is null for new account
 const clientOps = {
     network: 'testnet',
@@ -79,13 +76,14 @@ async function createTransaction(account, address, money) {
             recipient: address,
             satoshis: money,
         });
-
+        console.log(transaction);
         //account.sign(transaction);
 
         result = await account.broadcastTransaction(transaction);
         return result;
     }  catch(error) {
-        throw error;
+        console.log("create tarsnactio");
+        console.log(error);
     }
 }
 
@@ -114,6 +112,7 @@ async function topUpIdentity(identityId, amount, client) {
         const identity = await client.platform.identities.get(identityId);
         console.log(identity.balance);
     } catch(error) {
+        console.log("top up");
         console.log(error);
     }
 }
@@ -123,6 +122,7 @@ async function registerName(identityId, name, client) {
 
     try {
         const identity = await client.platform.identities.get(identityId);
+        console.log(identity);
         nameRegistration = await client.platform.names.register(name, identity);
     } catch(error) {
         console.log(error);
@@ -164,7 +164,14 @@ Promise.all([createOneWallet(client), createOneWallet(client2)])
         console.log(second.account.getTotalBalance());*/
 
         let transaction;
-        /*createTransaction(first.account, second.address.address, 100000000).then(
+        createTransaction(first.account, second.address.address, 100000000).then(
+            function transactionBroadcasted(result) {
+                transaction = result;
+                console.log(transaction);
+        });
+        //console.log(second.account);
+        //console.log(first.address.address);
+         /*createTransaction(second.account, first.address.address, 100000000).then(
             function transactionBroadcasted(result) {
                 transaction = result;
                 console.log(transaction);
@@ -199,19 +206,21 @@ Promise.all([createOneWallet(client), createOneWallet(client2)])
             }
         );*/
 
-        console.log(first);
-        console.log(second);
+        /*console.log(first.client);
+        console.log(second.client);*/
 
         //topUpIdentity('ZWbiYYM2BuC92eDsF186kqMTnQiQcjNg3QQmKN2Mhbv', 2000, first.client);
+        //topUpIdentity('21v59PWxENZXL4hnb1PTRMDibQt3fQ5t9DwyyycsG16f', 2000, second.client);
 
-        registerName('ZWbiYYM2BuC92eDsF186kqMTnQiQcjNg3QQmKN2Mhbv', "prvi").then((name) =>
-            console.log(name));
+        /*registerName('ZWbiYYM2BuC92eDsF186kqMTnQiQcjNg3QQmKN2Mhbv', "prvi", first.client).then((name) =>
+            console.log(name));*/
         /*registerName('21v59PWxENZXL4hnb1PTRMDibQt3fQ5t9DwyyycsG16f', "drugi", second.client).then((name) =>
             console.log(name));*/
 
         console.log(first.account.getTotalBalance());
         console.log(second.account.getTotalBalance());
     }).catch(function rejected(reason) {
+        console.log("main");
         console.log(reason);
     }
 )
