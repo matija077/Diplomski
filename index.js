@@ -22,6 +22,7 @@ const clientOps2 = {
 };
 // adress ybKetMrbXDBKLrfqA4iLf48bR5CfFrmw1m
 // identitydi 21v59PWxENZXL4hnb1PTRMDibQt3fQ5t9DwyyycsG16f
+// namehash 56200ca191d4f028be9764f8e102ef6a25f375b8921538b5a5a34b4ac5d76766be92
 
 // use this to get dash http://faucet.evonet.networks.dash.org/
 
@@ -117,6 +118,20 @@ async function topUpIdentity(identityId, amount, client) {
     }
 }
 
+async function registerName(identityId, name, client) {
+    var nameRegistration;
+
+    try {
+        const identity = await client.platform.identities.get(identityId);
+        nameRegistration = await client.platform.names.register(name, identity);
+    } catch(error) {
+        console.log(error);
+    }
+
+    return nameRegistration;
+}
+
+
 var first = {};
 var second = {};
 
@@ -145,8 +160,8 @@ Promise.all([createOneWallet(client), createOneWallet(client2)])
         second.client = client2
         //console.log(first);
 
-        console.log(first.account.getTotalBalance());
-        console.log(second.account.getTotalBalance());
+       /* console.log(first.account.getTotalBalance());
+        console.log(second.account.getTotalBalance());*/
 
         let transaction;
         /*createTransaction(first.account, second.address.address, 100000000).then(
@@ -160,7 +175,6 @@ Promise.all([createOneWallet(client), createOneWallet(client2)])
         /*createIdentity(first.client).then(
             function(result) {
                 first.identity = result;
-                first.identityId = first.ide
                 console.log(first.identity);
             }
         );
@@ -173,19 +187,27 @@ Promise.all([createOneWallet(client), createOneWallet(client2)])
 
         fs.writeFile('first.txt', first.toString(), (err) => console.log(err));
 
-        // TODO get identity
-        first.identity = first.client.platform.identities.get('ZWbiYYM2BuC92eDsF186kqMTnQiQcjNg3QQmKN2Mhbv').then(
+
+        /*first.identity = first.client.platform.identities.get('ZWbiYYM2BuC92eDsF186kqMTnQiQcjNg3QQmKN2Mhbv').then(
             function getIdentity(result) {
                 console.log(result);
             }
         );
-        second.identity = second.client.platform.identities.get('21v59PWxENZXL4hnb1PTRMDibQt3fQ5t9DwyyycsG16f').then(
+        /*second.identity = second.client.platform.identities.get('21v59PWxENZXL4hnb1PTRMDibQt3fQ5t9DwyyycsG16f').then(
             function getIdentity(result) {
                 console.log(result);
             }
-        );
+        );*/
+
+        console.log(first);
+        console.log(second);
 
         //topUpIdentity('ZWbiYYM2BuC92eDsF186kqMTnQiQcjNg3QQmKN2Mhbv', 2000, first.client);
+
+        registerName('ZWbiYYM2BuC92eDsF186kqMTnQiQcjNg3QQmKN2Mhbv', "prvi").then((name) =>
+            console.log(name));
+        /*registerName('21v59PWxENZXL4hnb1PTRMDibQt3fQ5t9DwyyycsG16f', "drugi", second.client).then((name) =>
+            console.log(name));*/
 
         console.log(first.account.getTotalBalance());
         console.log(second.account.getTotalBalance());
