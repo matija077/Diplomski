@@ -12,7 +12,8 @@
   },
   "scripts": {
     "test": "test",
-    "start": "nodemon index2.js"
+    "start": "nodemon index2.js",
+    "start-server": "nodemon server.js"
   },
   "repository": {
     "type": "git",
