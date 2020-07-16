@@ -32,33 +32,42 @@ var clientOps2 = new ClientOps(mnemonic2);
 var client1 = new Dash.Client(clientOps1);
 var client2 = new Dash.Client(clientOps2);
 
+console.log(client1.wallet);
+
 async function flow() {
-    const wallets = await Promise.all([createWallet(client1), createWallet(client2)]);
-    var wallet1 = wallets[0];
-    var wallet2 = wallets[1];
+    try{
+        //const wallets = await Promise.all([createWallet(client1), createWallet(client2)]);
 
-    /*console.log(wallet1.account.getUnusedAddress());
-    console.log(wallet2.account.getUnusedAddress());
-    console.log(await createTransaction(
-        wallets[1].account,
-        wallets[0].address.address,
-        100000000
-    ));*/
+        /*var wallet1 = wallets[0];
+        var wallet2 = wallets[1];*/
+        //console.log(await client1.wallet.getAccount());
 
-    //console.log(await createIdentity(client1));
-    //console.log(await createIdentity(client2));
+        /*console.log(wallet1.account.getUnusedAddress());
+        console.log(wallet2.account.getUnusedAddress());*/
+        /*console.log(await createTransaction(
+            wallets[1].account,
+            wallets[0].address.address,
+            100000000
+        ));*/
 
-    /*console.log(await registerName(
-        identity1,
-        "prvi",
-        client1));
-    console.log(await registerName(
-        identity2,
-        "drugi",
-        client2));*/
+        //console.log(await createIdentity(client1));
+        //console.log(await createIdentity(client2));
 
-    console.log(await client1.platform.names.get('prvi'));
-    console.log(await client2.platform.names.get('drugi'));
+        /*console.log(await registerName(
+            identity1,
+            "prvi",
+            client1));
+        console.log(await registerName(
+            identity2,
+            "drugi",
+            client2));*/
+
+        /*const name1 = await client1.platform.names.get('prvi');
+        const name2 = await client2.platform.names.get('drugi');
+        */
+    } catch(error) {
+        console.log(error);
+    }
 
 }
 
