@@ -4,8 +4,11 @@ import './header.style.css';
 function Header() {
     return(
         <div className="header">
-            Header
-
+            <div className="options">
+                <span className="option">Home page</span>
+                <span className="option">Projects</span>
+                <span className="option">My Projects</span>
+            </div>
         </div>
     );
 }
