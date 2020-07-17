@@ -3,17 +3,16 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-}
 
-.header .options {
+    .options {
     margin-left: auto;
     height: 100%;
     width:50%;
     display: flex;
     justify-content: flex-end;
 
-}
-
-.header .options .option {
-    cursor: pointer;
+        .option {
+            cursor: pointer;
+        }
+    }
 }
