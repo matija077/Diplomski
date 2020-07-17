@@ -1,0 +1,19 @@
+.header {
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header .options {
+    margin-left: auto;
+    height: 100%;
+    width:50%;
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+.header .options .option {
+    cursor: pointer;
+}

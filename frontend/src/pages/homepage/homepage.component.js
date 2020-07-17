@@ -4,6 +4,7 @@ import './homepage.style.css';
 function HomePage() {
     return (
         <div className="homepage">
+            <h1>Kickstart for students</h1>
         </div>
     );
 }
