@@ -4,6 +4,7 @@
   "description": "kickstart for students using Dash",
   "main": "index.js",
   "dependencies": {
+    "cors": "^2.8.5",
     "dash": "^3.13.4",
     "express": "^4.17.1"
   },

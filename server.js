@@ -1,5 +1,6 @@
 var http = require('http');
 var express = require('express');
+var cors = require('cors');
 
 var app = express();
 
@@ -11,9 +12,13 @@ app.use(express.static(__dirname  + '/frontend' + '/public'));
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
+app.use(cors());
+
 app.use('/', (req, res, next) => {
     next();
 });
+
+app.get('/', (req, res) => {});
 
 /*app.get('/', (req, res) => {
     res.send("<h1>Helllo</h1>");
@@ -57,7 +62,7 @@ app.listen(3000);
 
 server.listen(3000);*/
 
-/**
+/*
 
 / signin - POST = success or fail
 / register - POST = user
@@ -65,3 +70,27 @@ server.listen(3000);*/
 /projects - GET = list of projects
 /project/:id -GET = project
 
+*/
+
+app.post('/signin', (req, res) => {
+    // parse it
+    //body or what, JSOn or what?
+    // res,json(); or res.status(code).json(error)
+});
+
+app.post('/register', (req, res) => {
+
+});
+
+app.post('/profile:/id', (req, res) => {
+    var {id} = req.params;
+
+});
+
+app.post('/projects', (req, res) => {
+
+});
+
+app.post('/project:/id', (req, res) => {
+
+});
