@@ -14,11 +14,22 @@ app.use(express.json());
 
 app.use(cors());
 
-app.use('/', (req, res, next) => {
+/*app.use('/', (req, res, next) => {
     next();
+});*/
+
+/*app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/frontend' + 'public' + 'index.html');
 });
 
-app.get('/', (req, res) => {});
+
+app.get('/test', (req, res) => {
+    res.json("ola");
+});*/
+
+app.get('*', (req, res) => {
+    res.sendFile(__dirname + '/frontend' + 'public' + 'index.html');
+})
 
 /*app.get('/', (req, res) => {
     res.send("<h1>Helllo</h1>");
@@ -49,11 +60,13 @@ app.get('/', (req, res) => {});
 
 app.post('/test', (req, res) => {
     //console.log(req)
-    res.send(req.body);
+    res.json(req.body);
 
 });
 
-app.listen(3000);
+const port = process.env.port || 3001;
+
+app.listen(port);
 
 /*var server = http.createServer((request, response) => {
     response.setHeader('Content-Type', 'text/html');
@@ -72,7 +85,7 @@ server.listen(3000);*/
 
 */
 
-app.post('/signin', (req, res) => {
+/*app.post('/signin', (req, res) => {
     // parse it
     //body or what, JSOn or what?
     // res,json(); or res.status(code).json(error)
@@ -93,4 +106,4 @@ app.post('/projects', (req, res) => {
 
 app.post('/project:/id', (req, res) => {
 
-});
+});*/

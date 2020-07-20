@@ -11,6 +11,25 @@ class Projects extends React.Component {
         };
     }
 
+    componentDidMount() {
+        fetch('http://localhost:3001/test', {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                test: "test",
+            })
+        })
+        .then(function resolved(response) {
+            return response.json();
+        })
+        .then(function jsonData(data) {
+            console.log(data);
+        })
+        .catch(function rejected(error) {
+            console.log(error);
+        });
+    }
+
     render() {
 
         return (
