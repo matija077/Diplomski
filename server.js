@@ -7,7 +7,7 @@ var app = express();
 /**
  * how to serve statci files
  */
-app.use(express.static(__dirname  + '/frontend' + '/public'));
+app.use(express.static(__dirname  + '/frontend' + '/build'));
 
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
