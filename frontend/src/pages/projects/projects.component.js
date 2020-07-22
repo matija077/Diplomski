@@ -33,11 +33,10 @@ class Projects extends React.Component {
             headers: {'Content-Type': 'application/json'},
         })
         .then(function resolved(response) {
-            console.log(response);
             return response.json();
         })
         .then(function jsonData(data) {
-            console.log(JSON.parse(data));
+            console.log(data);
         })
         .catch(function rejected(error) {
             console.log(error);

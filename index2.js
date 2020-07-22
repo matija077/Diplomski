@@ -32,7 +32,7 @@ var clientOps2 = new ClientOps(mnemonic2);
 var client1 = new Dash.Client(clientOps1);
 var client2 = new Dash.Client(clientOps2);
 
-console.log(client1.wallet);
+var result = [client1, client2];
 
 async function flow() {
     try{
@@ -40,6 +40,7 @@ async function flow() {
 
         /*var wallet1 = wallets[0];
         var wallet2 = wallets[1];*/
+        console.log("dodem tu");
         //console.log(await client1.wallet.getAccount());
 
         /*console.log(wallet1.account.getUnusedAddress());
@@ -65,15 +66,18 @@ async function flow() {
         /*const name1 = await client1.platform.names.get('prvi');
         const name2 = await client2.platform.names.get('drugi');
         */
+
+        return [client1, client2];
+        //return client1;
     } catch(error) {
+        console.log("tu 1 eror");
         console.log(error);
     }
 
 }
 
-flow();
+module.exports = flow();
 
-module.exports = client1;
 
 
 
