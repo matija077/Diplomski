@@ -84,7 +84,7 @@ app.post('/test', (req, res) => {
 
 });
 
-const port = process.env.port || 3001;
+const port = process.env.port || 3000;
 
 app.listen(port);
 
