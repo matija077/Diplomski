@@ -36,7 +36,7 @@ console.log(client1.wallet);
 
 async function flow() {
     try{
-        //const wallets = await Promise.all([createWallet(client1), createWallet(client2)]);
+        const wallets = await Promise.all([createWallet(client1), createWallet(client2)]);
 
         /*var wallet1 = wallets[0];
         var wallet2 = wallets[1];*/

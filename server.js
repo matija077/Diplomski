@@ -12,7 +12,7 @@ app.use(express.static(__dirname  + '/frontend' + '/build'));
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
-app.use(cors());
+// app.use(cors());
 
 /*app.use('/', (req, res, next) => {
     next();
@@ -24,11 +24,11 @@ app.use(cors());
 
 
 app.get('/test', (req, res) => {
-    res.write("wrokign on it");
+    //res.write("wrokign on it");
     var dash = require('./index2');
     dash = JSON.stringify(dash, censor(dash))
-    res.write(dash);
-    res.end();
+    res.json(dash);
+    //res.end();
 });
 
 function censor(censor) {
@@ -38,8 +38,8 @@ function censor(censor) {
       if(i !== 0 && typeof(censor) === 'object' && typeof(value) == 'object' && censor == value)
         return '[Circular]';
 
-      if(i >= 29) // seems to be a harded maximum of 30 serialized objects?
-        return '[Unknown]';
+      /*if(i >= 29) // seems to be a harded maximum of 30 serialized objects?
+        return '[Unknown]';*/
 
       ++i; // so we know we aren't using the original object anymore
 

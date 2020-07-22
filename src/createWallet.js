@@ -3,6 +3,7 @@ async function createWallet(client) {
 
     try {
         wallet.account = await client.wallet.getAccount();
+        console.log(wallet.account);
         wallet.mnemonic = await client.wallet.exportWallet();
         wallet.address = await wallet.account.getUnusedAddress();
     } catch(error) {

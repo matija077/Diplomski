@@ -12,7 +12,7 @@ class Projects extends React.Component {
     }
 
     componentDidMount() {
-        fetch('/test', {
+        /*fetch('/test', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -23,7 +23,21 @@ class Projects extends React.Component {
             return response.json();
         })
         .then(function jsonData(data) {
-            console.log(data);
+            console.log(JSON.parse(data));
+        })
+        .catch(function rejected(error) {
+            console.log(error);
+        });*/
+        fetch('/test', {
+            method: 'get',
+            headers: {'Content-Type': 'application/json'},
+        })
+        .then(function resolved(response) {
+            console.log(response);
+            return response.json();
+        })
+        .then(function jsonData(data) {
+            console.log(JSON.parse(data));
         })
         .catch(function rejected(error) {
             console.log(error);
