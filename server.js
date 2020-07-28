@@ -4,6 +4,11 @@ var cors = require('cors');
 
 var app = express();
 
+// set base directory into global objects for easy access
+global.__basedir = __dirname;
+
+const port = process.env.port || 3000;
+
 /**
  * how to serve statci files
  */
@@ -23,17 +28,10 @@ app.use(express.json());
 });*/
 
 
-app.get('/test', (req, res) => {
-    require('./src/cycle');
-    var dash = require('./index2').then(function resolved(result) {
-        result = JSON.decycle(result);
-        res.json(result);
-    }).catch(function rejected(error) {
-        res.status(404);
-        console.log("tu 2 eror");
-        console.log(error);
-    });
-});
+require('./src/routes/index.route')(app);
+console.log()
+
+app.listen(port);
 
 /*app.get('*', (req, res) {
     res.sendFile(__dirname + '/frontend' + 'public' + 'index.html');
@@ -64,17 +62,6 @@ app.get('/test', (req, res) => {
     //res.status
 
 //});
-
-
-app.post('/test', (req, res) => {
-    //console.log(req)
-    res.json(req.body);
-
-});
-
-const port = process.env.port || 3000;
-
-app.listen(port);
 
 /*var server = http.createServer((request, response) => {
     response.setHeader('Content-Type', 'text/html');
