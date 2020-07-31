@@ -36,6 +36,7 @@ class Projects extends React.Component {
             return response.json();
         })
         .then(function jsonData(data) {
+            console.log("radi?");
             console.log(data);
         })
         .catch(function rejected(error) {

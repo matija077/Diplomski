@@ -4,12 +4,11 @@ async function createIdentity(client) {
     try {
         const platform = client.platform;
         identity = await platform.identities.register();
-        //return identity;
   } catch (e) {
-        console.error('Something went wrong:', e);
+        throw(e);
   }
 
-  console.log('balbal');
+  console.log('uidentity');
   return identity;
 }
 
