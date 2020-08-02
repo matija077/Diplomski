@@ -1,4 +1,4 @@
-var Dash = require('Dash');
+var Dash = require('dash');
 
 var ClientOps = require('./src/clientOptions');
 var  createClient = require('./src/createClient');
@@ -75,20 +75,18 @@ async function flow() {
         //console.log(await createIdentity(client1));
         //console.log(await createIdentity(client2));
 
-        console.log(await registerName(
+        /*console.log(await registerName(
             identity1,
             'prvi.dash',
             client1));
         console.log(await registerName(
             identity2,
             'drugi.dash',
-            client2));
+            client2));*/
 
         /*const platform1 = client1.platform;
         const name1 = await platform1.names.get('prvi');
         const name2 = await client2.platform.names.get('drugi');*/
-
-
 
         return [client1, client2];
         //return client1;
