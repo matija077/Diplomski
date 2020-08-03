@@ -6,7 +6,13 @@ var createWallet = require('./src/createWallet');
 var createTransaction = require('./src/createTransaction');
 var topUpIdentity = require('./src/topUpIdentity');
 var createIdentity = require('./src/createIdentity');
-const registerName = require('./src/registerName');
+var registerName = require('./src/registerName');
+var contractDocuments = require('./src/contractDocuments');
+var dataContract = require('./src/dataContract');
+var retrieveDataContract = require('./src/retrieveDataContract');
+var submitDocument = require('./src/submitDocument');
+var KickstartDocumentProperties = require('./src/kickstartDocumentProperties');
+var queryDocuments = require('./src/queryDocuments.js');
 
 const mnemonic1 = 'adult depart crazy royal rabbit twist wool inform top provide push dog';
 const mnemonic2 = 'source beauty atom lift salute giraffe indoor yellow manual minor opinion magic';
@@ -16,8 +22,11 @@ const address2 = 'ydzQ3dse33y67tGJtuSZGMWHZubgh2zHrh';
 
 const identity1 = 'An3wozaNdgwd9aB5Z81MYkkFiuxzLNSiT9Xhko6N2zoB';
 const identity1Pub = 'AtlGKCJaHmc8gy8Eda32qhQu2mBTnnFsqu96qjHbimYi';
+const contractID1 = 'CCY5RGbq5yskFudxgHeWxSU8zQdwXuzgcZLC5csi9tTa';
 const identity2 = '5Fn8KD8xeZcMQvY8LtDZpnj6Cx2g1BVGsCfMVgpYPZ8t';
 const identity2Pub = 'Asck9UXor8fUVb2ROld/23usOvSG9HhwmbrictDNIEoj';
+
+const KICKSTART_APPLICATION_NAME = 'kickstartContract';
 
 /*var clientOps1 = new ClientOps();
 var clientOps2 = new ClientOps();
@@ -29,7 +38,9 @@ createClient(clientOps2).then(function clientCreated(result) {
     console.log(clientOps2);
 });*/
 
-var clientOps1 = new ClientOps(mnemonic1);
+var clientOps1 = new ClientOps(
+    mnemonic1, KICKSTART_APPLICATION_NAME, contractID1
+);
 var clientOps2 = new ClientOps(mnemonic2);
 
 var client1 = new Dash.Client(clientOps1);
@@ -87,6 +98,33 @@ async function flow() {
         /*const platform1 = client1.platform;
         const name1 = await platform1.names.get('prvi');
         const name2 = await client2.platform.names.get('drugi');*/
+
+        // contracts
+        //await dataContract(client1.platform, identity1, contractDocuments);
+        console.log(await retrieveDataContract(
+            client1.platform, contractID1
+        ));
+
+        //documents
+        const documentType = "note";
+        const documentLocator = `${KICKSTART_APPLICATION_NAME}.${documentType}`;
+
+        const kickstartDocumentProperties = new KickstartDocumentProperties(
+            "Test" + new Date()
+        );
+
+        const nameDocumentLocator = "dpns.domain";
+
+        /*submitDocument(
+            client1.platform,
+            identity1,
+            kickstartDocumentProperties,
+            documentLocator
+        );*/
+
+        console.log(await queryDocuments(client1.platform, documentLocator));
+        //console.log(await queryDocuments(client1.platform, nameDocumentLocator));
+        //console.log(kickstartDocumentProperties.__proto__.__proto__);
 
         return [client1, client2];
         //return client1;
