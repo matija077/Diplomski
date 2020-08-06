@@ -7,11 +7,15 @@ var createTransaction = require('./src/createTransaction');
 var topUpIdentity = require('./src/topUpIdentity');
 var createIdentity = require('./src/createIdentity');
 var registerName = require('./src/registerName');
-var contractDocuments = require('./src/contractDocuments');
+var {contractDocuments, contractDocuments2} = require('./src/contractDocuments');
 var dataContract = require('./src/dataContract');
 var retrieveDataContract = require('./src/retrieveDataContract');
 var submitDocument = require('./src/submitDocument');
 var KickstartDocumentProperties = require('./src/kickstartDocumentProperties');
+var {
+    UserProperties,
+    ProjectProperties
+} = require('./src/kickstartDocumentProperties2');
 var queryDocuments = require('./src/queryDocuments.js');
 
 const mnemonic1 = 'adult depart crazy royal rabbit twist wool inform top provide push dog';
@@ -23,6 +27,7 @@ const address2 = 'ydzQ3dse33y67tGJtuSZGMWHZubgh2zHrh';
 const identity1 = 'An3wozaNdgwd9aB5Z81MYkkFiuxzLNSiT9Xhko6N2zoB';
 const identity1Pub = 'AtlGKCJaHmc8gy8Eda32qhQu2mBTnnFsqu96qjHbimYi';
 const contractID1 = 'CCY5RGbq5yskFudxgHeWxSU8zQdwXuzgcZLC5csi9tTa';
+const contractID2 = '81sZbwhToSzaGnyJj6cGtyTfjvrmufTAtXatfTxDXWNa';
 const identity2 = '5Fn8KD8xeZcMQvY8LtDZpnj6Cx2g1BVGsCfMVgpYPZ8t';
 const identity2Pub = 'Asck9UXor8fUVb2ROld/23usOvSG9HhwmbrictDNIEoj';
 
@@ -39,7 +44,7 @@ createClient(clientOps2).then(function clientCreated(result) {
 });*/
 
 var clientOps1 = new ClientOps(
-    mnemonic1, KICKSTART_APPLICATION_NAME, contractID1
+    mnemonic1, KICKSTART_APPLICATION_NAME, contractID2
 );
 var clientOps2 = new ClientOps(mnemonic2);
 
@@ -101,29 +106,56 @@ async function flow() {
 
         // contracts
         //await dataContract(client1.platform, identity1, contractDocuments);
-        console.log(await retrieveDataContract(
+        //await dataContract(client1.platform, identity1, contractDocuments2);
+        //console.log(contractDocuments2);
+        /*console.log(await retrieveDataContract(
             client1.platform, contractID1
         ));
+        console.log(await retrieveDataContract(
+            client1.platform, contractID2
+        ));*/
 
         //documents
-        const documentType = "note";
-        const documentLocator = `${KICKSTART_APPLICATION_NAME}.${documentType}`;
+        const documentTypeNote = "note";
+        const documentTypeUser = "user";
+        const documentTypeProject = "project";
+        const documentLocatorProject = `${KICKSTART_APPLICATION_NAME}.${documentTypeProject}`;
+        const documentLocatorUser = `${KICKSTART_APPLICATION_NAME}.${documentTypeUser}`;
+        //const testDocumentLocator = 'testApp.project';
 
         const kickstartDocumentProperties = new KickstartDocumentProperties(
             "Test" + new Date()
         );
+        const userProperties = new UserProperties(
+            "123456789011",
+            "testic1 User"
+        );
+        const projectProperties = new ProjectProperties(
+            "123456789011",
+            "testProject",
+            "moze li ovo raditi33?"
+        );
 
         const nameDocumentLocator = "dpns.domain";
+
+        //console.log(projectProperties);
+        //console.log(userProperties);
 
         /*submitDocument(
             client1.platform,
             identity1,
-            kickstartDocumentProperties,
-            documentLocator
+            projectProperties,
+            documentLocatorProject
+        );*/
+        /*submitDocument(
+            client1.platform,
+            identity1,
+            userProperties,
+            documentLocatorUser
         );*/
 
-        console.log(await queryDocuments(client1.platform, documentLocator));
-        //console.log(await queryDocuments(client1.platform, nameDocumentLocator));
+        //console.log(await queryDocuments(client1.platform, documentLocatorUser));
+        console.log(await queryDocuments(client1.platform, documentLocatorProject));
         //console.log(kickstartDocumentProperties.__proto__.__proto__);
 
         return [client1, client2];

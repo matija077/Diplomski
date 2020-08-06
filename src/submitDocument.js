@@ -4,6 +4,7 @@ async function submitDocument(
     platform, identityID, documentProperties,
     documentLocator) {
     try {
+        console.log("uunutra");
         const identity = await platform.identities.get(identityID);
 
         const document = await platform.documents.create(

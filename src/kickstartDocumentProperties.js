@@ -1,7 +1,7 @@
 var DocumentProperties = require('./documentProperties');
 
 function KickstartDocumentProperties(message) {
-    DocumentProperties(this);
+    DocumentProperties.call(this);
 
     this.message = message;
 }

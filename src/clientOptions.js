@@ -10,7 +10,7 @@ function ClientOps(
     };
     this.apps = {
         [applicationName]: {
-            contractId: contractId
+            contractId: contractId,
         }
     };
 };
