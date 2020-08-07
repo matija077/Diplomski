@@ -67,7 +67,7 @@ var client3  = new Dash.Client(clientOps3);
 
 var result = [client1, client2];
 
-async function flow() {
+async function flow(id) {
     try{
         const wallets = await Promise.all([
             createWallet(client1),
@@ -191,7 +191,8 @@ async function flow() {
             await platform.contracts.broadcast(contract1, identity);
         }*/
 
-        const queryOptions = findById(identity3);
+        id = id || identity1;
+        const queryOptions = findById(id);
         //console.log(await queryDocuments(client3.platform, documentLocatorUser, queryOptions));
         //console.log(await queryDocuments(client3.platform, documentLocatorProject, queryOptions));
         var result = [];
@@ -210,7 +211,7 @@ async function flow() {
 
 }
 
-module.exports = flow();
+module.exports = flow;
 
 
 
