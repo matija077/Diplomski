@@ -1,4 +1,4 @@
-async function dataContract(platform, identityID, document) {
+async function dataContract(platform, identityID, document, definitions) {
     try {
         const identity = await platform.identities.get(identityID);
 
@@ -6,6 +6,10 @@ async function dataContract(platform, identityID, document) {
 
         const contract = await platform.contracts.create(document, identity);
         console.dir(contract);
+
+        if (definitions) {
+            contract.setDefinitions(definitions);
+        }
 
         const validationResult = await platform.dpp.dataContract.validate(contract);
         if (validationResult.isValid()) {
