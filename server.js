@@ -29,7 +29,6 @@ app.use(express.json());
 
 
 require('./src/routes/index.route')(app);
-console.log()
 
 app.listen(port);
 

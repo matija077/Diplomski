@@ -192,12 +192,16 @@ async function flow() {
         }*/
 
         const queryOptions = findById(identity3);
-        console.log(await queryDocuments(client3.platform, documentLocatorUser, queryOptions));
-        console.log(await queryDocuments(client3.platform, documentLocatorProject, queryOptions));
+        //console.log(await queryDocuments(client3.platform, documentLocatorUser, queryOptions));
+        //console.log(await queryDocuments(client3.platform, documentLocatorProject, queryOptions));
+        var result = [];
+        result.push(await queryDocuments(client3.platform, documentLocatorUser, queryOptions));
+        result.push(await queryDocuments(client3.platform, documentLocatorProject, queryOptions));
         //console.log(kickstartDocumentProperties.__proto__.__proto__);
 
-        return [client1, client2];
-        //return client1;
+        //return [client1, client2];
+        console.log(result);
+        return result;
     } catch(error) {
         console.log("tu 1 eror");
         console.log(error);
