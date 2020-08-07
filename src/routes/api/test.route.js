@@ -3,6 +3,7 @@ function testRoute(app, params) {
         require(global.__basedir + '/src/cycle');
         var dash = require(global.__basedir + '/index2').then(function resolved(result) {
             result = JSON.decycle(result);
+            //console.log(result);
             res.json(result);
         }).catch(function rejected(error) {
             res.status(404);
