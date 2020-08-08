@@ -18,6 +18,11 @@ var {
 } = require('./src/kickstartDocumentProperties2');
 var queryDocuments = require('./src/queryDocuments.js');
 var {queryOptionsFindById: findById} = require('./src/Project/queryOptions');
+var CreateDocumentBatch = require('./src/createDocumentBatch');
+var createReplaceBatch = require('./src/createReplaceBatch');
+var createDeleteBatch = require('./src/createDeleteBatch');
+var signContract = require('./src/signContract');
+const createDocumentBatch = require('./src/createDocumentBatch');
 
 const mnemonic1 = 'adult depart crazy royal rabbit twist wool inform top provide push dog';
 const mnemonic2 = 'source beauty atom lift salute giraffe indoor yellow manual minor opinion magic';
@@ -158,50 +163,52 @@ async function flow(id) {
         );
         const projectProperties = new ProjectProperties(
             "123456789011",
-            "testProject",
-            "moze li ovo raditi od strane clienta 3?"
+            "test 3 3 client ",
+            "Heloooooooooooo sdadadsas?"
         );
 
         const nameDocumentLocator = "dpns.domain";
 
-        //console.log(projectProperties);
-        //console.log(userProperties);
+        const identity1Real = await client1.platform.identities.get(identity1);
+        const identity3Real = await client3.platform.identities.get(identity3);
 
-        /*submitDocument(
+        //signContract(client3, identity3Real, contract2);
+
+        id = id || identity3;
+        let queryOptions = findById(id);
+
+        const arrayDocuments = await queryDocuments(client3.platform, documentLocatorProject, queryOptions);
+        let createBatch = await createDocumentBatch(
             client3.platform,
-            identity3,
+            identity3Real,
             projectProperties,
             documentLocatorProject
+        );
+        let replaceBatch = createReplaceBatch(
+            arrayDocuments[0]
+        );
+        let deleteBatch = createDeleteBatch(
+            arrayDocuments[3]
+        );
+        //console.log(deleteBatch);
+        replaceBatch.replace[0].data.description = "Halelujaaaaaa jso pdoataka";
+        /*await submitDocument(
+            client3.platform,
+            deleteBatch,
+            identity3Real,
         );*/
-        /*submitDocument(
-            client1.platform,
-            identity1,
-            userProperties,
-            documentLocatorUser
-        );*/
 
-        /*const platform = client3.platform;
-        const identity = await platform.identities.get(identity3);
+        //queryOptions = findById(id);
 
-        const validationResult = await platform.dpp.dataContract.validate(contract2);
-
-        if (validationResult.isValid()) {
-            console.log("validation passed, broadcasting contract..");
-            // Sign and submit the data contract
-            await platform.contracts.broadcast(contract1, identity);
-        }*/
-
-        id = id || identity1;
-        const queryOptions = findById(id);
         //console.log(await queryDocuments(client3.platform, documentLocatorUser, queryOptions));
         //console.log(await queryDocuments(client3.platform, documentLocatorProject, queryOptions));
         var result = [];
+        //await platform.documents.delete();
         result.push(await queryDocuments(client3.platform, documentLocatorUser, queryOptions));
         result.push(await queryDocuments(client3.platform, documentLocatorProject, queryOptions));
         //console.log(kickstartDocumentProperties.__proto__.__proto__);
 
         //return [client1, client2];
-        console.log(result);
         return result;
     } catch(error) {
         console.log("tu 1 eror");
