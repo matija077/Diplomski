@@ -5,7 +5,18 @@ var projectContractDocument = {
         required: [],
         additionalProperties: false,
     },
-    userProjects: {},
+    userProjects: {
+        indices: [],
+        properties: {
+            projectList: {
+                type: "array",
+                description: "list of user projects",
+            },
+
+        },
+        required: [],
+        additionalProperties: false,
+    },
     project: {
         indices: [],
         properties: {

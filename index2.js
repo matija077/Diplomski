@@ -18,6 +18,7 @@ var {
 } = require('./src/kickstartDocumentProperties2');
 var queryDocuments = require('./src/queryDocuments.js');
 var {queryOptionsFindById: findById} = require('./src/Project/queryOptions');
+var CreateDocumentBatch = require('./src/createDocumentBatch');
 
 const mnemonic1 = 'adult depart crazy royal rabbit twist wool inform top provide push dog';
 const mnemonic2 = 'source beauty atom lift salute giraffe indoor yellow manual minor opinion magic';
@@ -158,8 +159,8 @@ async function flow(id) {
         );
         const projectProperties = new ProjectProperties(
             "123456789011",
-            "testProject",
-            "moze li ovo raditi od strane clienta 3?"
+            "testProjectNovosti",
+            "moze li ovo raditi od strane clienta 1 verzija 1?"
         );
 
         const nameDocumentLocator = "dpns.domain";
@@ -167,11 +168,17 @@ async function flow(id) {
         //console.log(projectProperties);
         //console.log(userProperties);
 
-        /*submitDocument(
-            client3.platform,
-            identity3,
+        const identity1Real = await client1.platform.identities.get(identity1);
+        /*const documentBatch1 = await CreateDocumentBatch(
+            client1.platform,
+            identity1Real,
             projectProperties,
             documentLocatorProject
+        );
+        submitDocument(
+            client1.platform,
+            documentBatch1,
+            identity1Real
         );*/
         /*submitDocument(
             client1.platform,
@@ -196,12 +203,13 @@ async function flow(id) {
         //console.log(await queryDocuments(client3.platform, documentLocatorUser, queryOptions));
         //console.log(await queryDocuments(client3.platform, documentLocatorProject, queryOptions));
         var result = [];
+        //await platform.documents.delete();
         result.push(await queryDocuments(client3.platform, documentLocatorUser, queryOptions));
         result.push(await queryDocuments(client3.platform, documentLocatorProject, queryOptions));
         //console.log(kickstartDocumentProperties.__proto__.__proto__);
 
+        //const arrayDocuments = await queryDocuments(client3.platform, documentLocatorProject, queryOptions);
         //return [client1, client2];
-        console.log(result);
         return result;
     } catch(error) {
         console.log("tu 1 eror");

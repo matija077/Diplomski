@@ -1,19 +1,16 @@
-var DocumentBatch = require('./documentBatch');
-
 async function submitDocument(
-    platform, identityID, documentProperties,
-    documentLocator) {
+    platform, documentBatch, identity) {
     try {
         console.log("uunutra");
-        const identity = await platform.identities.get(identityID);
 
-        const document = await platform.documents.create(
-            documentLocator,
-            identity,
-            documentProperties
-        );
-
-        const documentBatch = new DocumentBatch([document]);
+        /*let documentBatch;
+        if (replace) {
+            documentBatch = new DocumentBatch([], [document]);
+        } else if (erase) {
+            documentBatch = new DocumentBatch([], [], [document]);
+        } else {
+            documentBatch = new DocumentBatch([document]);
+        }*/
 
         await platform.documents.broadcast(documentBatch, identity);
     }
