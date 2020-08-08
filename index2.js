@@ -19,6 +19,7 @@ var {
 var queryDocuments = require('./src/queryDocuments.js');
 var {queryOptionsFindById: findById} = require('./src/Project/queryOptions');
 var CreateDocumentBatch = require('./src/createDocumentBatch');
+var createReplaceBatch = require('./src/createReplaceBatch');
 
 const mnemonic1 = 'adult depart crazy royal rabbit twist wool inform top provide push dog';
 const mnemonic2 = 'source beauty atom lift salute giraffe indoor yellow manual minor opinion magic';
@@ -169,6 +170,7 @@ async function flow(id) {
         //console.log(userProperties);
 
         const identity1Real = await client1.platform.identities.get(identity1);
+        const identity3Real = await client3.platform.identities.get(identity3);
         /*const documentBatch1 = await CreateDocumentBatch(
             client1.platform,
             identity1Real,
@@ -198,8 +200,21 @@ async function flow(id) {
             await platform.contracts.broadcast(contract1, identity);
         }*/
 
-        id = id || identity1;
-        const queryOptions = findById(id);
+        id = id || identity3;
+        let queryOptions = findById(id, 1);
+
+        const arrayDocuments = await queryDocuments(client3.platform, documentLocatorProject, queryOptions);
+        let batch = createReplaceBatch(
+            arrayDocuments[0]
+        );
+        /*submitDocument(
+            client3.platform,
+            batch,
+            identity3Real,
+        );*/
+
+        queryOptions = findById(id);
+
         //console.log(await queryDocuments(client3.platform, documentLocatorUser, queryOptions));
         //console.log(await queryDocuments(client3.platform, documentLocatorProject, queryOptions));
         var result = [];
@@ -208,7 +223,6 @@ async function flow(id) {
         result.push(await queryDocuments(client3.platform, documentLocatorProject, queryOptions));
         //console.log(kickstartDocumentProperties.__proto__.__proto__);
 
-        //const arrayDocuments = await queryDocuments(client3.platform, documentLocatorProject, queryOptions);
         //return [client1, client2];
         return result;
     } catch(error) {

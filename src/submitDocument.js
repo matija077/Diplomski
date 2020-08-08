@@ -1,8 +1,6 @@
 async function submitDocument(
     platform, documentBatch, identity) {
     try {
-        console.log("uunutra");
-
         /*let documentBatch;
         if (replace) {
             documentBatch = new DocumentBatch([], [document]);

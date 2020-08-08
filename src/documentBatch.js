@@ -1,9 +1,9 @@
 function DocumentBatch(createArray = [], replaceArray = [], deleteArray = []) {
     var batches = {};
 
-    if (createArray) {
+    if (createArray.length) {
         batches.create = createArray;
-    } else if (replaceArray) {
+    } else if (replaceArray.length) {
         batches.replace = replaceArray;
     } else {
         batches.delete = deleteArray;
