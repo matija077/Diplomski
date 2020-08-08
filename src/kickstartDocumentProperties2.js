@@ -4,7 +4,7 @@ function KickstartDocumentProperties2(id, name) {
     DocumentProperties.call(this);
 
     this.id = id;
-    this.name = id;
+    this.name = name;
 }
 
 KickstartDocumentProperties2.prototype = Object.create(

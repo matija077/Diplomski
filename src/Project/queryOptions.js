@@ -1,9 +1,12 @@
-function queryOptionsFindById(id) {
+function queryOptionsFindById(
+    id, limit = 0, startAt = undefined, startAfter) {
     var queryOptions = {
         where: [
             ['$ownerId', '==', id],
         ],
-        limit: 0,
+        limit: limit,
+        startAt: startAt,
+        startAfter: startAfter
     }
 
     return queryOptions;
