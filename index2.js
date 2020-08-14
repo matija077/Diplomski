@@ -11,10 +11,10 @@ var {contractDocuments, contractDocuments2} = require('./src/contractDocuments')
 var dataContract = require('./src/dataContract');
 var retrieveDataContract = require('./src/retrieveDataContract');
 var submitDocument = require('./src/submitDocument');
-var KickstartDocumentProperties = require('./src/kickstartDocumentProperties');
+var KickstartDocumentPropertiesOld = require('./src/kickstartDocumentPropertiesOld');
 var {
     UserProperties,
-    ProjectProperties
+    ProjectProperties: ProjectPropertiesOld
 } = require('./src/kickstartDocumentProperties2');
 var queryDocuments = require('./src/queryDocuments.js');
 var {queryOptionsFindById: findById} = require('./src/Project/queryOptions');
@@ -22,7 +22,16 @@ var CreateDocumentBatch = require('./src/createDocumentBatch');
 var createReplaceBatch = require('./src/createReplaceBatch');
 var createDeleteBatch = require('./src/createDeleteBatch');
 var signContract = require('./src/signContract');
-const createDocumentBatch = require('./src/createDocumentBatch');
+var createDocumentBatch = require('./src/createDocumentBatch');
+
+var {
+    kickstartContractDocument,
+    kickstartDefinitions
+} = require('./src/Project/kickstartContractDocument');
+var {
+    ProjectOverviewProperties,
+    ProjectProperties
+} = require('./src/Project/kickstartDocumentProperties');
 
 const mnemonic1 = 'adult depart crazy royal rabbit twist wool inform top provide push dog';
 const mnemonic2 = 'source beauty atom lift salute giraffe indoor yellow manual minor opinion magic';
@@ -36,6 +45,7 @@ const identity1 = 'An3wozaNdgwd9aB5Z81MYkkFiuxzLNSiT9Xhko6N2zoB';
 const identity1Pub = 'AtlGKCJaHmc8gy8Eda32qhQu2mBTnnFsqu96qjHbimYi';
 const contractID1 = 'CCY5RGbq5yskFudxgHeWxSU8zQdwXuzgcZLC5csi9tTa';
 const contractID2 = '81sZbwhToSzaGnyJj6cGtyTfjvrmufTAtXatfTxDXWNa';
+const contractFIrst = '5EMuyGAXLgtwBZdVqSAQhzE96xTfrrFVY872AWNw9t1a';
 
 const identity2 = '5Fn8KD8xeZcMQvY8LtDZpnj6Cx2g1BVGsCfMVgpYPZ8t';
 const identity2Pub = 'Asck9UXor8fUVb2ROld/23usOvSG9HhwmbrictDNIEoj';
@@ -57,13 +67,13 @@ createClient(clientOps3).then(function clientCreated(result) {
 });*/
 
 var clientOps1 = new ClientOps(
-    mnemonic1, KICKSTART_APPLICATION_NAME, contractID2
+    mnemonic1, KICKSTART_APPLICATION_NAME, contractFIrst
 );
 var clientOps2 = new ClientOps(
-    mnemonic2, KICKSTART_APPLICATION_NAME, contract2ID1
+    mnemonic2, KICKSTART_APPLICATION_NAME, contractFIrst
 );
 var clientOps3 = new ClientOps(
-    mnemonic3, KICKSTART_APPLICATION_NAME, contractID2
+    mnemonic3, KICKSTART_APPLICATION_NAME, contractFIrst
 );
 
 var client1 = new Dash.Client(clientOps1);
@@ -128,20 +138,22 @@ async function flow(id) {
         const name2 = await client2.platform.names.get('drugi');*/
 
         // contracts
-        //await dataContract(client1.platform, identity1, contractDocuments);
+        /*await dataContract(client3.platform, identity3, kickstartContractDocument,
+        );*/
         //await dataContract(client2.platform, identity2, contractDocuments2);
         //console.log(contractDocuments2);
         /*const contract2 = await retrieveDataContract(
-            client1.platform, contractID2
+            client1.platform, contractFIrst
         );
-        console.log(contract2.documents.user.indices.properties);
+        //console.log(contract2.documents.user.indices.properties);
+        console.log(contract2.documents.project);
         await retrieveDataContract(
-            client3.platform, contractID1
+            client3.platform, contractFIrst
         );
         console.log(contract2);*/
-        /*console.log(await retrieveDataContract(
-            clientRandom.platform, contractID1
-        ));*/
+        /*const retrieveCtr = await retrieveDataContract(
+            client3.platform, contractFIrst
+        );*/
         /*console.log(await retrieveDataContract(
             clientRandom.platform, contract2ID1
         ));*/
@@ -150,37 +162,51 @@ async function flow(id) {
         const documentTypeNote = "note";
         const documentTypeUser = "user";
         const documentTypeProject = "project";
+        const documentTypeProjectOverview = "projectOverview";
         const documentLocatorProject = `${KICKSTART_APPLICATION_NAME}.${documentTypeProject}`;
         const documentLocatorUser = `${KICKSTART_APPLICATION_NAME}.${documentTypeUser}`;
+        const documentLocatorProjectOverview = `${KICKSTART_APPLICATION_NAME}.${documentTypeProjectOverview}`;
         //const testDocumentLocator = 'testApp.project';
 
-        const kickstartDocumentProperties = new KickstartDocumentProperties(
+        const kickstartDocumentPropertiesOld = new KickstartDocumentPropertiesOld(
             "Test" + new Date()
         );
         const userProperties = new UserProperties(
             "123456789011",
             "testic1 User"
         );
-        const projectProperties = new ProjectProperties(
+        const projectPropertiesOld = new ProjectPropertiesOld(
             "123456789011",
             "test 3 3 client ",
             "Heloooooooooooo sdadadsas?"
         );
 
+        const projectProperties = new ProjectProperties(
+            "1234567890111234567890123456789123456789012222",
+        );
+        const projectOverviewProperties = new ProjectOverviewProperties(
+            "2234567890111234567890123456789123456780",
+            "Test1",
+            100,
+            "testing first time"
+        );
+
         const nameDocumentLocator = "dpns.domain";
 
         const identity1Real = await client1.platform.identities.get(identity1);
+        const identity2Real = await client2.platform.identities.get(identity2);
         const identity3Real = await client3.platform.identities.get(identity3);
 
-        //signContract(client3, identity3Real, contract2);
+        //signContract(client1.platform, identity1Real, contractFIrst);
 
         id = id || identity3;
         let queryOptions = findById(id);
 
-        const arrayDocuments = await queryDocuments(client3.platform, documentLocatorProject, queryOptions);
+        const arrayDocuments = await queryDocuments(
+            client3.platform, documentLocatorProjectOverview, queryOptions);
         let createBatch = await createDocumentBatch(
-            client3.platform,
-            identity3Real,
+            client1.platform,
+            identity1Real,
             projectProperties,
             documentLocatorProject
         );
@@ -190,13 +216,13 @@ async function flow(id) {
         let deleteBatch = createDeleteBatch(
             arrayDocuments[3]
         );
-        //console.log(deleteBatch);
-        replaceBatch.replace[0].data.description = "Halelujaaaaaa jso pdoataka";
-        /*await submitDocument(
-            client3.platform,
-            deleteBatch,
-            identity3Real,
-        );*/
+        //console.log(createBatch);
+        //replaceBatch.replace[0].data.description = "Halelujaaaaaa jso pdoataka";
+        await submitDocument(
+            client1.platform,
+            createBatch,
+            identity1Real,
+        );
 
         //queryOptions = findById(id);
 
@@ -204,11 +230,11 @@ async function flow(id) {
         //console.log(await queryDocuments(client3.platform, documentLocatorProject, queryOptions));
         var result = [];
         //await platform.documents.delete();
-        result.push(await queryDocuments(client3.platform, documentLocatorUser, queryOptions));
-        result.push(await queryDocuments(client3.platform, documentLocatorProject, queryOptions));
+        result.push(await queryDocuments(client3.platform, documentLocatorProjectOverview));
+        result.push(await queryDocuments(client3.platform, documentLocatorProject));
         //console.log(kickstartDocumentProperties.__proto__.__proto__);
 
-        //return [client1, client2];
+        //return [client1, client2, client3, createBatch, retrieveCtr];
         return result;
     } catch(error) {
         console.log("tu 1 eror");

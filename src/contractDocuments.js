@@ -58,6 +58,19 @@ var contractDocuments2 = {
                 type: "string",
                 minLength: 10,
                 description: "descprition"
+            },
+            test: {
+                type: "array",
+                items: {
+                    type: "object",
+                    properties: {
+                        name: {
+                            type: "string"
+                        },
+                    },
+                    additionalProperties: false,
+
+                }
             }
         },
         required: [

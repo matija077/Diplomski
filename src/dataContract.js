@@ -2,8 +2,6 @@ async function dataContract(platform, identityID, document, definitions) {
     try {
         const identity = await platform.identities.get(identityID);
 
-        console.log(platform);
-
         const contract = await platform.contracts.create(document, identity);
         console.dir(contract);
 
@@ -16,8 +14,18 @@ async function dataContract(platform, identityID, document, definitions) {
             console.log("passed");
 
             await platform.contracts.broadcast(contract, identity);
+            /*platform.contracts.broadcast(contract, identity).then(
+                function resolved(resolve) {
+                    console.log("radi");
+
+                }, function rejected(error) {
+                    console.log("ovo ne radi");
+                    console.log(error);
+                }
+            );*/
+            console.log("broadcas tsuccesfull");
         } else {
-            console.log(validationResult);
+            console.log("validaton not apssed");
             throw(validationResult.errors);
         }
     }

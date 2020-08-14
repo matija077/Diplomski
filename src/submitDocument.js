@@ -13,6 +13,7 @@ async function submitDocument(
         await platform.documents.broadcast(documentBatch, identity);
     }
     catch(error) {
+        console.log("g=zgrejsih");
         console.log(error);
         throw(error);
     }

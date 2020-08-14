@@ -28,7 +28,7 @@ class Projects extends React.Component {
         .catch(function rejected(error) {
             console.log(error);
         });*/
-        fetch('/test', {
+        fetch('/projects', {
             method: 'get',
             headers: {'Content-Type': 'application/json'},
         })
