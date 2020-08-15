@@ -45,7 +45,7 @@ const identity1 = 'An3wozaNdgwd9aB5Z81MYkkFiuxzLNSiT9Xhko6N2zoB';
 const identity1Pub = 'AtlGKCJaHmc8gy8Eda32qhQu2mBTnnFsqu96qjHbimYi';
 const contractID1 = 'CCY5RGbq5yskFudxgHeWxSU8zQdwXuzgcZLC5csi9tTa';
 const contractID2 = '81sZbwhToSzaGnyJj6cGtyTfjvrmufTAtXatfTxDXWNa';
-const contractFIrst = 'CndXAMRkRrPxT7Jpmp2Y17rQKqE5998Q87eEKmK7KTM7';
+const contractFIrst = '3yxDsUn3SQqfndgBWtmWZFfqyDBSj1S1oMABfM2qcdRt';
 
 const identity2 = '5Fn8KD8xeZcMQvY8LtDZpnj6Cx2g1BVGsCfMVgpYPZ8t';
 const identity2Pub = 'Asck9UXor8fUVb2ROld/23usOvSG9HhwmbrictDNIEoj';
@@ -139,7 +139,7 @@ async function flow(id) {
 
         // contracts
         /*await dataContract(client1.platform, identity1, kickstartContractDocument,
-        );*/
+            kickstartDefinitions);*/
         //await dataContract(client2.platform, identity2, contractDocuments2);
         //console.log(contractDocuments2);
         /*const contract2 = await retrieveDataContract(
@@ -181,15 +181,29 @@ async function flow(id) {
             "Heloooooooooooo sdadadsas?"
         );
 
+        const date = new Date();
+        var timestamp = {
+            day: date.getDate().toString(),
+            month: date.getMonth().toString(),
+            year: date.getFullYear().toString(),
+            second: date.getSeconds().toString(),
+            minute: date.getMinutes().toString(),
+            hour:  date.getHours().toString()
+        };
+
         const projectProperties = new ProjectProperties(
             "2234567890111234567890123456789123456789012222",
-            30,
+            40,
+            undefined,
+            undefined,
+            timestamp
         );
         const projectOverviewProperties = new ProjectOverviewProperties(
-            "2234567890111234567890123456789123456780",
-            "Bezveze",
-            20,
-            "ZELIM DIPLOMIRATI please"
+            "1234567890111234567890123456789123456780",
+            "Diplomski",
+            10,
+            "ZELIM DIPLOMIRATI",
+            timestamp
         );
 
         const nameDocumentLocator = "dpns.domain";
@@ -206,8 +220,8 @@ async function flow(id) {
         const arrayDocuments = await queryDocuments(
             client3.platform, documentLocatorProjectOverview, queryOptions);
         let createBatch = await createDocumentBatch(
-            client3.platform,
-            identity3Real,
+            client2.platform,
+            identity2Real,
             projectProperties,
             documentLocatorProject
         );
@@ -220,9 +234,9 @@ async function flow(id) {
         //console.log(createBatch);
         //replaceBatch.replace[0].data.description = "Halelujaaaaaa jso pdoataka";
         /*await submitDocument(
-            client3.platform,
+            client2.platform,
             createBatch,
-            identity3Real,
+            identity2Real,
         );*/
 
         //queryOptions = findById(id);

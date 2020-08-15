@@ -9,7 +9,23 @@ async function getAllProjects(client, options) {
 }
 
 async function getLatestProjectData(client, options, projectID) {
-    var projectDataDocuments = getAllProjectData(client, options, projectID);
+    //var projectDataDocuments = getAllProjectData(client, options, projectID);
+    var orderBy = [
+        ["timestamp", "desc"],
+    ];
+
+    var queryOptions = queryOptionsFindById(
+        projectID,
+        "projectID",
+        orderBy,
+        1
+    );
+
+    return await get (
+        client,
+        options.documentLocatorProject,
+        queryOptions
+    );
 }
 
 async function getAllProjectData(client, options, projectID){
@@ -23,7 +39,6 @@ async function getAllProjectData(client, options, projectID){
         options.documentLocatorProject,
         queryOptions
     );
-
 }
 
 module.exports = {

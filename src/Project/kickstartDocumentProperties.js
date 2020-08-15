@@ -14,12 +14,13 @@ KickstartDocumentProperties.prototype.constructor = KickstartDocumentProperties;
 Object.setPrototypeOf(KickstartDocumentProperties, DocumentProperties);
 
 
-function ProjectOverviewProperties(id, name, deadline, description) {
+function ProjectOverviewProperties(id, name, deadline, description, timeOfCreation) {
     KickstartDocumentProperties.call(this, id);
 
     this.name = name;
     this.deadline = deadline;
     this.description = description;
+    this.timeOfCreation = timeOfCreation;
 }
 
 ProjectOverviewProperties.prototype = Object.create(
@@ -30,12 +31,13 @@ ProjectOverviewProperties.prototype.constructor = ProjectOverviewProperties;
 Object.setPrototypeOf(ProjectOverviewProperties, KickstartDocumentProperties);
 
 
-function ProjectProperties(id,funds = 0, goals, rewards) {
+function ProjectProperties(id,funds = 0, goals, rewards, timestamp) {
     KickstartDocumentProperties.call(this, id);
 
     this.funds = funds;
     this.goals = goals;
     this.rewards = rewards;
+    this.timestamp = timestamp;
 }
 
 ProjectProperties.prototype = Object.create(

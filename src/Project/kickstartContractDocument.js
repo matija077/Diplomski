@@ -4,8 +4,11 @@ project: {
         {
             properties: [{ "projectID": "asc" }]
         },
-       {
-            properties: [{ "projectID": "asc" }, {"funds": "desc"}]
+        {
+            properties: [{ "funds": "desc" }]
+        },
+        {
+            properties: [{ "timestamp": "desc" }]
         }
     ],
     properties: {
@@ -18,6 +21,9 @@ project: {
         funds: {
             type: "number",
             description: "funds gathered sofar"
+        },
+        timestamp: {
+            $ref: "#/definitions/timestamp"
         },
         goals: {
             type: "array",
@@ -120,19 +126,52 @@ projectOverview: {
             minLength: 10,
             description: "project description"
         },
+        timeOfCreation: {
+            $ref: "#/definitions/timestamp"
+        }
     },
-    required: ["name", "projectID", "deadline"],
+    required: ["name", "projectID", "deadline", "timeOfCreation"],
     additionalProperties: false,
 }
 };
 
 var kickstartDefinitions = {
-reward: {
-
-},
-goal: {
-
-}
+    timestamp: {
+        type: "object",
+        properties: {
+            day: {
+                type: "string",
+                minLength: 1,
+                maxLength: 2,
+            },
+            month: {
+                type: "string",
+                minLength: 1,
+                maxLength: 2,
+            },
+            year: {
+                type: "string",
+                minLength: 4,
+                maxLength: 4,
+            },
+            second: {
+                type: "string",
+                minLength: 1,
+                maxLength: 2,
+            },
+            minute: {
+                type: "string",
+                minLength: 1,
+                maxLength: 2,
+            },
+            hour: {
+                type: "string",
+                minLength: 1,
+                maxLength: 2,
+            }
+        },
+        additionalProperties: false
+    }
 };
 
 module.exports = {

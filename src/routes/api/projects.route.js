@@ -5,7 +5,7 @@ function projectsRoute(app, {clients, options}) {
     var projectsApi = require(global.__basedir + "/src/project_routes_files/projectsApi");
 
     app.get('/projects', (req, res) => {
-            projectsApi.getAllProjectData(clients[0], options, projectID1).then(
+            projectsApi.getLatestProjectData(clients[0], options, projectID1).then(
                 function resolved(result) {
                     require(global.__basedir + '/src/cycle');
                     result = JSON.decycle(result);
