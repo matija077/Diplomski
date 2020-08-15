@@ -1,10 +1,10 @@
 var identity1 = 'An3wozaNdgwd9aB5Z81MYkkFiuxzLNSiT9Xhko6N2zoB';
 
 function projectsRoute(app, {clients, options}) {
-    //console.log(params);
+    var projectsApi = require(global.__basedir + "/src/project_routes_files/projectsApi");
+
     app.get('/projects', (req, res) => {
-        var documents = require(global.__basedir +
-            "/src/project_routes_files/getAllProjects")(clients[0], options).then(
+            projectsApi.getAllProjects(clients[0], options).then(
                 function resolved(result) {
                     require(global.__basedir + '/src/cycle');
                     result = JSON.decycle(result);

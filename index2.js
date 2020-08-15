@@ -186,10 +186,10 @@ async function flow(id) {
             56,
         );
         const projectOverviewProperties = new ProjectOverviewProperties(
-            "2234567890111234567890123456789123456780",
-            "Test1",
-            100,
-            "testing first time"
+            "3234567890111234567890123456789123456780",
+            "Diploma",
+            10,
+            "ZELIM DIPLOMIRATI"
         );
 
         const nameDocumentLocator = "dpns.domain";
@@ -208,8 +208,8 @@ async function flow(id) {
         let createBatch = await createDocumentBatch(
             client1.platform,
             identity1Real,
-            projectProperties,
-            documentLocatorProject
+            projectOverviewProperties,
+            documentLocatorProjectOverview
         );
         let replaceBatch = createReplaceBatch(
             arrayDocuments[0]

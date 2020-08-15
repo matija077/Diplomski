@@ -27,10 +27,15 @@ app.use(express.json());
     res.sendFile(__dirname + '/frontend' + 'public' + 'index.html');
 });*/
 
+require(global.__basedir + '/index2')().then(
+    function resolved(resolve) {
+        require('./src/routes/index.route')(app, resolve);
+        app.listen(port);
+    }, function rejected(error) {
+        console.log("somehtign is worng");
+    }
+);
 
-require('./src/routes/index.route')(app);
-
-app.listen(port);
 
 /*app.get('*', (req, res) {
     res.sendFile(__dirname + '/frontend' + 'public' + 'index.html');
