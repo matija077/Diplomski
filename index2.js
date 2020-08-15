@@ -45,7 +45,7 @@ const identity1 = 'An3wozaNdgwd9aB5Z81MYkkFiuxzLNSiT9Xhko6N2zoB';
 const identity1Pub = 'AtlGKCJaHmc8gy8Eda32qhQu2mBTnnFsqu96qjHbimYi';
 const contractID1 = 'CCY5RGbq5yskFudxgHeWxSU8zQdwXuzgcZLC5csi9tTa';
 const contractID2 = '81sZbwhToSzaGnyJj6cGtyTfjvrmufTAtXatfTxDXWNa';
-const contractFIrst = '5EMuyGAXLgtwBZdVqSAQhzE96xTfrrFVY872AWNw9t1a';
+const contractFIrst = 'CndXAMRkRrPxT7Jpmp2Y17rQKqE5998Q87eEKmK7KTM7';
 
 const identity2 = '5Fn8KD8xeZcMQvY8LtDZpnj6Cx2g1BVGsCfMVgpYPZ8t';
 const identity2Pub = 'Asck9UXor8fUVb2ROld/23usOvSG9HhwmbrictDNIEoj';
@@ -138,7 +138,7 @@ async function flow(id) {
         const name2 = await client2.platform.names.get('drugi');*/
 
         // contracts
-        /*await dataContract(client3.platform, identity3, kickstartContractDocument,
+        /*await dataContract(client1.platform, identity1, kickstartContractDocument,
         );*/
         //await dataContract(client2.platform, identity2, contractDocuments2);
         //console.log(contractDocuments2);
@@ -182,14 +182,14 @@ async function flow(id) {
         );
 
         const projectProperties = new ProjectProperties(
-            "1234567890111234567890123456789123456789012222",
-            56,
+            "2234567890111234567890123456789123456789012222",
+            20,
         );
         const projectOverviewProperties = new ProjectOverviewProperties(
-            "3234567890111234567890123456789123456780",
-            "Diploma",
-            10,
-            "ZELIM DIPLOMIRATI"
+            "2234567890111234567890123456789123456780",
+            "Bezveze",
+            20,
+            "ZELIM DIPLOMIRATI please"
         );
 
         const nameDocumentLocator = "dpns.domain";
@@ -206,10 +206,10 @@ async function flow(id) {
         const arrayDocuments = await queryDocuments(
             client3.platform, documentLocatorProjectOverview, queryOptions);
         let createBatch = await createDocumentBatch(
-            client1.platform,
-            identity1Real,
-            projectOverviewProperties,
-            documentLocatorProjectOverview
+            client2.platform,
+            identity2Real,
+            projectProperties,
+            documentLocatorProject
         );
         let replaceBatch = createReplaceBatch(
             arrayDocuments[0]
@@ -220,9 +220,9 @@ async function flow(id) {
         //console.log(createBatch);
         //replaceBatch.replace[0].data.description = "Halelujaaaaaa jso pdoataka";
         /*await submitDocument(
-            client1.platform,
+            client2.platform,
             createBatch,
-            identity1Real,
+            identity2Real,
         );*/
 
         //queryOptions = findById(id);

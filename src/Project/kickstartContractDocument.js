@@ -1,13 +1,13 @@
 var kickstartContractDocument = {
 project: {
-    /*indices: [
+    indices: [
         {
-            properties: [{ "projectr": "asc" }]
+            properties: [{ "projectID": "asc" }]
         },
        {
-            properties: [{ "projectr": "asc" },{"funds": "desc"}]
+            properties: [{ "projectID": "asc" }, {"funds": "desc"}]
         }
-    ],*/
+    ],
     properties: {
         projectID: {
             type: "string",

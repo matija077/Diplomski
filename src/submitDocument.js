@@ -11,6 +11,7 @@ async function submitDocument(
         }*/
 
         await platform.documents.broadcast(documentBatch, identity);
+        console.log("uspjeh kreiranaj dokumenata");
     }
     catch(error) {
         console.log("g=zgrejsih");
