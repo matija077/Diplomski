@@ -183,7 +183,7 @@ async function flow(id) {
 
         const projectProperties = new ProjectProperties(
             "2234567890111234567890123456789123456789012222",
-            20,
+            30,
         );
         const projectOverviewProperties = new ProjectOverviewProperties(
             "2234567890111234567890123456789123456780",
@@ -206,8 +206,8 @@ async function flow(id) {
         const arrayDocuments = await queryDocuments(
             client3.platform, documentLocatorProjectOverview, queryOptions);
         let createBatch = await createDocumentBatch(
-            client2.platform,
-            identity2Real,
+            client3.platform,
+            identity3Real,
             projectProperties,
             documentLocatorProject
         );
@@ -220,9 +220,9 @@ async function flow(id) {
         //console.log(createBatch);
         //replaceBatch.replace[0].data.description = "Halelujaaaaaa jso pdoataka";
         /*await submitDocument(
-            client2.platform,
+            client3.platform,
             createBatch,
-            identity2Real,
+            identity3Real,
         );*/
 
         //queryOptions = findById(id);

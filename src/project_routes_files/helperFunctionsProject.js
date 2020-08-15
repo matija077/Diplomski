@@ -1,20 +1,23 @@
 var queryDocuments = require('../queryDocuments');
 
-async function get(client, options, queryOptions) {
+async function get(client, option, queryOptions) {
     var arrayDocuments;
 
     try {
         arrayDocuments = await queryDocuments(
             client.platform,
-            options.documentLocatorProjectOverview,
+            option,
             queryOptions
         );
     } catch(Error) {
-        console.log(getAllProjects.name);
+        console.log(get.name);
         throw Error;
     }
 
     return arrayDocuments;
 }
 
-module.exports = get;
+
+module.exports = {
+    get,
+};

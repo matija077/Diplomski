@@ -1,5 +1,5 @@
 function queryOptionsFindById(
-    id, whichId = "$ownerId", limit = 0, startAt = undefined, startAfter) {
+    id, whichId = "$ownerId", limit = 100, startAt, startAfter) {
     var queryOptions = {
         where: [
             [`${whichId}`, '==', id],
