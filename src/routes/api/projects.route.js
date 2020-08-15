@@ -1,13 +1,15 @@
 var identity1 = 'An3wozaNdgwd9aB5Z81MYkkFiuxzLNSiT9Xhko6N2zoB';
 
-function projectsRoute(app, params) {
+function projectsRoute(app, {clients, options}) {
+    //console.log(params);
     app.get('/projects', (req, res) => {
-        var dash = require(global.__basedir + '/index2')().then(
-            function resolved(result) {
-                require(global.__basedir + '/src/cycle');
-                result = JSON.decycle(result);
-                res.json(result);
-            }
+        var documents = require(global.__basedir +
+            "/src/project_routes_files/getAllProjects")(clients[0], options).then(
+                function resolved(result) {
+                    require(global.__basedir + '/src/cycle');
+                    result = JSON.decycle(result);
+                    res.json(result);
+                }
         ).catch(function rejected(error) {
             res.status(404);
             console.log(error);

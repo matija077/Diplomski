@@ -183,6 +183,7 @@ async function flow(id) {
 
         const projectProperties = new ProjectProperties(
             "1234567890111234567890123456789123456789012222",
+            56,
         );
         const projectOverviewProperties = new ProjectOverviewProperties(
             "2234567890111234567890123456789123456780",
@@ -218,11 +219,11 @@ async function flow(id) {
         );
         //console.log(createBatch);
         //replaceBatch.replace[0].data.description = "Halelujaaaaaa jso pdoataka";
-        await submitDocument(
+        /*await submitDocument(
             client1.platform,
             createBatch,
             identity1Real,
-        );
+        );*/
 
         //queryOptions = findById(id);
 
@@ -234,7 +235,18 @@ async function flow(id) {
         result.push(await queryDocuments(client3.platform, documentLocatorProject));
         //console.log(kickstartDocumentProperties.__proto__.__proto__);
 
-        //return [client1, client2, client3, createBatch, retrieveCtr];
+        client1.identityReal = identity1Real;
+        client2.identityReal = identity2Real;
+        client3.identityReal = identity3Real;
+        const options = {
+            documentLocatorProject: documentLocatorProject,
+            documentLocatorProjectOverview: documentLocatorProjectOverview,
+            documentTypeProject: documentTypeProject,
+            documentTypeProjectOverview: documentTypeProjectOverview
+        };
+        const clients = [client1, client2, client3];
+        //console.log(result);
+        return {clients, options};
         return result;
     } catch(error) {
         console.log("tu 1 eror");

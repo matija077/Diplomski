@@ -12,6 +12,15 @@ function queryOptionsFindById(
     return queryOptions;
 };
 
+function queryOptionsGetAll() {
+    var queryOptions = {
+
+    };
+
+    return queryOptions;
+};
+
 module.exports = {
-    queryOptionsFindById
+    queryOptionsFindById,
+    queryOptionsGetAll
 };
