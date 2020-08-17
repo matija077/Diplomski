@@ -84,6 +84,7 @@ var result = [client1, client2];
 
 async function flow(id) {
     try{
+        console.log("da vidimo ovo");
         const wallets = await Promise.all([
             createWallet(client1),
             createWallet(client2),
@@ -207,6 +208,7 @@ async function flow(id) {
         );
 
         const nameDocumentLocator = "dpns.domain";
+
 
         const identity1Real = await client1.platform.identities.get(identity1);
         const identity2Real = await client2.platform.identities.get(identity2);

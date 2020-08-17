@@ -5,17 +5,46 @@ function projectsRoute(app, {clients, options}) {
     var projectsApi = require(global.__basedir + "/src/project_routes_files/projectsApi");
 
     app.get('/projects', (req, res) => {
-            projectsApi.getLatestProjectData(clients[0], options, projectID1).then(
-                function resolved(result) {
-                    require(global.__basedir + '/src/cycle');
-                    result = JSON.decycle(result);
-                    res.json(result);
-                }
-        ).catch(function rejected(error) {
-            res.status(404);
-            console.log(error);
+        projectsApi.getAllProjects(clients[0], options).then(
+            function resolved(result) {
+                require(global.__basedir + '/src/cycle');
+                result = JSON.decycle(result);
+                res.json(result);
+            }
+        ).catch(
+            function rejected(error) {
+                res.status(404);
+                console.log(error);
         });
     });
+
+    app.get('/projects/project/all', (req, res) => {
+        var projectID = req.body.id;
+        projectsApi.getAllProjectData(clients[0], options, projectID).then(
+            function resolved(result) {
+                require(global.__basedir + '/src/cycle');
+                result = JSON.decycle(result);
+                res.json(result);
+        }).catch(
+            function rejected(error) {
+                res.status(404);
+                console.log(error);
+        });
+    })
+
+    app.get('/projects/project/last', (req, res) => {
+        var projectID = req.body.id;
+        projectsApi.getLatestProjectData(clients[0], options, projectID).then(
+            function resolved(result) {
+                require(global.__basedir + '/src/cycle');
+                result = JSON.decycle(result);
+                res.json(result);
+        }).catch(
+            function rejected(error) {
+                res.status(404);
+                console.log(error);
+        });
+    })
 
     app.post('/projects', (req, res) => {
         console.log(app._router.stack);
