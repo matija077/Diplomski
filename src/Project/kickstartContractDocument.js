@@ -1,4 +1,10 @@
 var kickstartContractDocument = {
+    /**
+     * user:
+     *  id
+     *  ownProjects: [id list]
+     *  donating project {id, funds}
+     */
 project: {
     indices: [
         {

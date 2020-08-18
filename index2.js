@@ -65,15 +65,16 @@ var clientOps3 = new ClientOps();
 createClient(clientOps3).then(function clientCreated(result) {
     console.log(clientOps3);
 });*/
+var dpnsContractId = "FiBkhut4LFPMJqDWbZrxVeT6Mr6LsH3mTNTSSHJY2ape";
 
 var clientOps1 = new ClientOps(
-    mnemonic1, KICKSTART_APPLICATION_NAME, contractFIrst
+    mnemonic1, KICKSTART_APPLICATION_NAME, contractFIrst, dpnsContractId
 );
 var clientOps2 = new ClientOps(
-    mnemonic2, KICKSTART_APPLICATION_NAME, contractFIrst
+    mnemonic2, KICKSTART_APPLICATION_NAME, contractFIrst, dpnsContractId
 );
 var clientOps3 = new ClientOps(
-    mnemonic3, KICKSTART_APPLICATION_NAME, contractFIrst
+    mnemonic3, KICKSTART_APPLICATION_NAME, contractFIrst, dpnsContractId
 );
 
 var client1 = new Dash.Client(clientOps1);
@@ -126,13 +127,13 @@ async function flow(id) {
         //console.log(await createIdentity(client3));
 
         /*console.log(await registerName(
-            identity1,
-            'prvi.dash',
-            client1));
-        console.log(await registerName(
             identity2,
-            'drugi.dash',
-            client2));*/
+            'drugi',
+            client2));
+        console.log(await registerName(
+            identity3,
+            'treci',
+            client3));*/
 
         /*const platform1 = client1.platform;
         const name1 = await platform1.names.get('prvi');
@@ -261,7 +262,7 @@ async function flow(id) {
             documentTypeProjectOverview: documentTypeProjectOverview
         };
         const clients = [client1, client2, client3];
-        //console.log(result);
+        console.log(await client1.platform.names.get('treci'));
         return {clients, options};
         return result;
     } catch(error) {

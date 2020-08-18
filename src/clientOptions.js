@@ -2,6 +2,7 @@ function ClientOps(
     mnemonic = null,
     applicationName = null,
     contractId = null,
+    dpnsContractId,
     network = 'testnet',
 ) {
     this.network = network;
@@ -11,6 +12,9 @@ function ClientOps(
     this.apps = {
         [applicationName]: {
             contractId: contractId,
+        },
+        dpns: {
+            contractId: dpnsContractId
         }
     };
 };
