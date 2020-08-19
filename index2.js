@@ -220,7 +220,7 @@ async function flow(id) {
         id = id || identity3;
         let queryOptions = findById(id);
 
-        const arrayDocuments = await queryDocuments(
+        /*const arrayDocuments = await queryDocuments(
             client3.platform, documentLocatorProjectOverview, queryOptions);
         let createBatch = await createDocumentBatch(
             client2.platform,
@@ -233,7 +233,7 @@ async function flow(id) {
         );
         let deleteBatch = createDeleteBatch(
             arrayDocuments[3]
-        );
+        );*/
         //console.log(createBatch);
         //replaceBatch.replace[0].data.description = "Halelujaaaaaa jso pdoataka";
         /*await submitDocument(
@@ -248,8 +248,8 @@ async function flow(id) {
         //console.log(await queryDocuments(client3.platform, documentLocatorProject, queryOptions));
         var result = [];
         //await platform.documents.delete();
-        result.push(await queryDocuments(client3.platform, documentLocatorProjectOverview));
-        result.push(await queryDocuments(client3.platform, documentLocatorProject));
+        //result.push(await queryDocuments(client3.platform, documentLocatorProjectOverview));
+        //result.push(await queryDocuments(client3.platform, documentLocatorProject));
         //console.log(kickstartDocumentProperties.__proto__.__proto__);
 
         client1.identityReal = identity1Real;
@@ -262,7 +262,7 @@ async function flow(id) {
             documentTypeProjectOverview: documentTypeProjectOverview
         };
         const clients = [client1, client2, client3];
-        console.log(await client1.platform.names.get('treci'));
+        //console.log(await client1.platform.names.get('treci'));
         return {clients, options};
         return result;
     } catch(error) {
