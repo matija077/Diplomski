@@ -5,6 +5,7 @@ function projectsRoute(app, {clients, options}) {
     var projectsApi = require(global.__basedir + "/src/project_routes_files/projectsApi");
 
     app.get('/projects', (req, res) => {
+        console.log(app._router.stack);
         projectsApi.getAllProjects(clients[0], options).then(
             function resolved(result) {
                 require(global.__basedir + '/src/cycle');
@@ -33,11 +34,11 @@ function projectsRoute(app, {clients, options}) {
         });
     })
 
-    app.get('/projects/project/last', (req, res) => {
-        var projectID = req.params.id;
-        //var id = req.params.id;
-        //var client = clients[id];
-        projectsApi.getLatestProjectData(clients[0], options, projectID).then(
+    app.get('/projects/project/last/:projectID/:userIndex', (req, res) => {
+        var projectID = req.params.projectID;
+        var userIndex = req.params.userIndex;
+
+        projectsApi.getLatestProjectData(clients[userIndex], options, projectID).then(
             function resolved(result) {
                 require(global.__basedir + '/src/cycle');
                 result = JSON.decycle(result);
@@ -65,8 +66,6 @@ function projectsRoute(app, {clients, options}) {
             res.status(404);
             console.log(error);
         });
-
-
     });
 }
 

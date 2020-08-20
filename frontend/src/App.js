@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import Header from './components/header/header.component';
 import HomePage from './pages/homepage/homepage.component';
 import Projects from './pages/projects/projects.component';
+import ProjectDetails from './components/projectDetails/projectDetails.component';
 import Authentication from './pages/authentication/authentication.component';
 import './App.css';
 
@@ -31,7 +32,7 @@ class App extends React.Component {
       return response.json();
     })
     .then(function jsonData(data) {
-      this.props.setCurrentUser(data)
+      this.props.setCurrentUser(data, user)
     }.bind(this))
     .catch(function rejected(error) {
       console.log(error);
@@ -47,11 +48,12 @@ class App extends React.Component {
         <Header setUser={this.setUser}></Header>
         <Switch>
           <Route exact component={HomePage} path='/'></Route>
-          <Route component={null} path='/projects:1'></Route>
+          <Route component={ProjectDetails} path='/projects/:projectID'></Route>
           <Route
             path='/projects'
-            render={(user) => (<Projects user={user} />)}
-            ></Route>
+            component={Projects}
+          >
+          </Route>
           <Route component={null} path='my_projects'></Route>
           <Route
             render={() =>
@@ -76,7 +78,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    setCurrentUser: user => dispatch(setCurrentUser(user))
+    setCurrentUser: (user, userNumber) => dispatch(setCurrentUser(user, userNumber))
   };
 
 }

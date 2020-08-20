@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 import './projectDetails.style.scss';
 
@@ -11,7 +12,8 @@ class ProjectDetails extends React.Component {
     }
 
     componentDidMount() {
-        fetch(`/projects/project/last/id=${this.props.id}`, {
+        console.log(this.props);
+        fetch(`/projects/project/last/${this.props.match.params.projectID}/${this.props.userIndex}`, {
             method: 'get',
             headers: {'Content-Type': 'application/json'},
         })
@@ -26,7 +28,6 @@ class ProjectDetails extends React.Component {
                     fetched: true,
                 }
             );
-            console.log(data);
         }.bind(this))
         .catch(function rejected(error) {
             console.log(error);
@@ -43,5 +44,11 @@ class ProjectDetails extends React.Component {
 
 }
 
-export default ProjectDetails;
+function mapStateToProps(state) {
+    return {
+        userIndex: state.user.userNumber
+    }
+}
+
+export default connect(mapStateToProps)(ProjectDetails);
 

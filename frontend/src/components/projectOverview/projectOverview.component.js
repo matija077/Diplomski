@@ -7,12 +7,15 @@ import ProjectDetails from '../projectDetails/projectDetails.component';
 import './projectOverview.style.scss';
 
 function ProjectOverview({project}) {
+    console.log(project);
     return (
         <div className="project-properties">
-            <h1
+            <Link
                 className="title"
-                onClick={() => console.log("clicked")}
-            >{ project.data.name }</h1>
+                to={{
+                    pathname: `/projects/${project.data.projectID}`
+                    }}
+            >{ project.data.name }</Link>
             <div>
                 <span className="name">Deadline</span>
                 <span className="number"> { project.data.deadline }</span>

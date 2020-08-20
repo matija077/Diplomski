@@ -1,8 +1,11 @@
 import {userActionTypes} from './user.types';
 
-export function setCurrentUser(user) {
+export function setCurrentUser(user, userNumber) {
     return {
         type: userActionTypes.SET_CURRENT_USER,
-        payload: user,
+        payload: {
+            user: user,
+            userNumber: userNumber
+        }
     };
 }
