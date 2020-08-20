@@ -48,7 +48,10 @@ class App extends React.Component {
         <Switch>
           <Route exact component={HomePage} path='/'></Route>
           <Route component={null} path='/projects:1'></Route>
-          <Route component={Projects} path='/projects'></Route>
+          <Route
+            path='/projects'
+            render={(user) => (<Projects user={user} />)}
+            ></Route>
           <Route component={null} path='my_projects'></Route>
           <Route
             render={() =>
