@@ -1,12 +1,15 @@
 import React from 'react';
 
 import {Switch, Route, Redirect} from 'react-router-dom';
+import {connect} from 'react-redux';
 
 import Header from './components/header/header.component';
 import HomePage from './pages/homepage/homepage.component';
 import Projects from './pages/projects/projects.component';
 import Authentication from './pages/authentication/authentication.component';
 import './App.css';
+
+import {setCurrentUser} from './redux/user/user.actions';
 
 class App extends React.Component {
   constructor() {
@@ -28,11 +31,7 @@ class App extends React.Component {
       return response.json();
     })
     .then(function jsonData(data) {
-      this.setState(
-        {
-          user: data
-        }
-      );
+      this.props.setCurrentUser(data)
     }.bind(this))
     .catch(function rejected(error) {
       console.log(error);
@@ -41,6 +40,7 @@ class App extends React.Component {
 
   render() {
     var {user} = this.state;
+    console.log(this.props.currentUser);
 
     return (
       <div>
@@ -68,4 +68,17 @@ class App extends React.Component {
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    currentUser: state.user.currentUser,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setCurrentUser: user => dispatch(setCurrentUser(user))
+  };
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
