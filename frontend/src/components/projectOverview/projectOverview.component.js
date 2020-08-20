@@ -17,6 +17,11 @@ function ProjectOverview({project}) {
                     }}
             >{ project.data.name }</Link>
             <div>
+                <span className="name">Project Owner</span>
+                <span className="owner">{project.data.ownerName}</span>
+            </div>
+
+            <div>
                 <span className="name">Deadline</span>
                 <span className="number"> { project.data.deadline }</span>
             </div>

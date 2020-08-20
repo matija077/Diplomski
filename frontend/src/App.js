@@ -2,6 +2,7 @@ import React from 'react';
 
 import {Switch, Route, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
+import {createStructuredSelector} from 'reselect';
 
 import Header from './components/header/header.component';
 import HomePage from './pages/homepage/homepage.component';
@@ -11,6 +12,7 @@ import Authentication from './pages/authentication/authentication.component';
 import './App.css';
 
 import {setCurrentUser} from './redux/user/user.actions';
+import {selectCurrentUser} from './redux/user/user.selectors';
 
 class App extends React.Component {
   constructor() {
@@ -70,11 +72,9 @@ class App extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    currentUser: state.user.currentUser,
-  };
-}
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
+});
 
 function mapDispatchToProps(dispatch) {
   return {
