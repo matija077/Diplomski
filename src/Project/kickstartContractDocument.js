@@ -31,6 +31,71 @@ project: {
         timestamp: {
             $ref: "#/definitions/timestamp"
         },
+        name: {
+            type: "string",
+            description: "payer's name",
+            maxLength: 63,
+        }
+    },
+    required: ["projectID", "funds"],
+    additionalProperties: false,
+},
+projectOverview: {
+    indices: [
+        {
+            properties: [
+                { "$ownerId": "asc" },
+            ],
+        },
+        {
+            properties: [
+                { "projectID": "asc" }
+            ],
+            "unique": true,
+        },
+        {
+            properties: [
+                { "deadline": "asc" }
+            ]
+        },
+        {
+            properties: [
+                { "ownerName": "asc" }
+            ]
+        },
+    ],
+    properties: {
+        name: {
+            type: "string",
+            description: "project name",
+            minLength: 2,
+            maxLength: 100
+        },
+        projectID: {
+            type: "string",
+            description: "project",
+            minLength: 31,
+            maxLength: 32,
+        },
+        deadline: {
+            type: "number",
+            description: "days until project has to be completed",
+            minimum: 10,
+            maximum: 730,
+        },
+        description: {
+            type: "string",
+            minLength: 10,
+            description: "project description"
+        },
+        timeOfCreation: {
+            $ref: "#/definitions/timestamp"
+        },
+        ownerName: {
+            type: "string",
+            maxLength: 63,
+            description: "owner's name"
+        },
         goals: {
             type: "array",
             items: {
@@ -85,56 +150,6 @@ project: {
                 additionalProperties: false,
             }
         },
-    },
-    required: ["projectID", "funds"],
-    additionalProperties: false,
-},
-projectOverview: {
-    indices: [
-        {
-            properties: [
-                { "$ownerId": "asc" },
-            ],
-        },
-        {
-            properties: [
-                { "projectID": "asc" }
-            ],
-            "unique": true,
-        },
-        {
-            properties: [
-                { "deadline": "asc" }
-            ]
-        },
-    ],
-    properties: {
-        name: {
-            type: "string",
-            description: "project name",
-            minLength: 2,
-            maxLength: 100
-        },
-        projectID: {
-            type: "string",
-            description: "project",
-            minLength: 31,
-            maxLength: 32,
-        },
-        deadline: {
-            type: "number",
-            description: "days until project has to be completed",
-            minimum: 10,
-            maximum: 730,
-        },
-        description: {
-            type: "string",
-            minLength: 10,
-            description: "project description"
-        },
-        timeOfCreation: {
-            $ref: "#/definitions/timestamp"
-        }
     },
     required: ["name", "projectID", "deadline", "timeOfCreation"],
     additionalProperties: false,

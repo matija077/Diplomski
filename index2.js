@@ -45,7 +45,7 @@ const identity1 = 'An3wozaNdgwd9aB5Z81MYkkFiuxzLNSiT9Xhko6N2zoB';
 const identity1Pub = 'AtlGKCJaHmc8gy8Eda32qhQu2mBTnnFsqu96qjHbimYi';
 const contractID1 = 'CCY5RGbq5yskFudxgHeWxSU8zQdwXuzgcZLC5csi9tTa';
 const contractID2 = '81sZbwhToSzaGnyJj6cGtyTfjvrmufTAtXatfTxDXWNa';
-const contractFIrst = '3yxDsUn3SQqfndgBWtmWZFfqyDBSj1S1oMABfM2qcdRt';
+const contractFIrst = '2nZJg1voCjJHFm7QFYU1hKsWVUgRJWtwK1m8gSnXCY2e';
 
 const identity2 = '5Fn8KD8xeZcMQvY8LtDZpnj6Cx2g1BVGsCfMVgpYPZ8t';
 const identity2Pub = 'Asck9UXor8fUVb2ROld/23usOvSG9HhwmbrictDNIEoj';
@@ -135,9 +135,12 @@ async function flow(id) {
             'treci',
             client3));*/
 
-        /*const platform1 = client1.platform;
-        const name1 = await platform1.names.get('prvi');
-        const name2 = await client2.platform.names.get('drugi');*/
+        //const platform1 = client1.platform;
+        const name1 = await client1.platform.names.get('prvi');
+        const name2 = await client2.platform.names.get('drugi');
+        const name3 = await client3.platform.names.get('treci');
+
+        //console.log(name1);
 
         // contracts
         /*await dataContract(client1.platform, identity1, kickstartContractDocument,
@@ -194,18 +197,20 @@ async function flow(id) {
         };
 
         const projectProperties = new ProjectProperties(
-            "2234567890111234567890123456789123456789012222",
-            40,
-            undefined,
-            undefined,
-            timestamp
+            "1234567890111234567890123456789123456789012222",
+            46,
+            timestamp,
+            name2.data.label
         );
         const projectOverviewProperties = new ProjectOverviewProperties(
-            "1234567890111234567890123456789123456780",
-            "Diplomski",
-            10,
-            "ZELIM DIPLOMIRATI",
-            timestamp
+            "3234567890111234567890123456789123456780",
+            "Test",
+            12,
+            "Idemooo idemooooo",
+            timestamp,
+            undefined,
+            undefined,
+            name3.data.label
         );
 
         const nameDocumentLocator = "dpns.domain";
@@ -217,17 +222,23 @@ async function flow(id) {
 
         //signContract(client1.platform, identity1Real, contractFIrst);
 
-        id = id || identity3;
+        //id = id || identity2;
+        id = identity3;
         let queryOptions = findById(id);
 
         /*const arrayDocuments = await queryDocuments(
-            client3.platform, documentLocatorProjectOverview, queryOptions);
+            client1.platform, documentLocatorProjectOverview, queryOptions);
         let createBatch = await createDocumentBatch(
             client2.platform,
             identity2Real,
             projectProperties,
             documentLocatorProject
         );
+        arrayDocuments[0].data.name = "Test";
+        arrayDocuments[0].data.goals = undefined;
+        arrayDocuments[0].data.rewards = undefined;
+
+        console.log(arrayDocuments);
         let replaceBatch = createReplaceBatch(
             arrayDocuments[0]
         );
@@ -237,9 +248,9 @@ async function flow(id) {
         //console.log(createBatch);
         //replaceBatch.replace[0].data.description = "Halelujaaaaaa jso pdoataka";
         /*await submitDocument(
-            client2.platform,
-            createBatch,
-            identity2Real,
+            client3.platform,
+            replaceBatch,
+            identity3Real,
         );*/
 
         //queryOptions = findById(id);
