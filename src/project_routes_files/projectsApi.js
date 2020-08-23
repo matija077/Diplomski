@@ -11,7 +11,7 @@ async function getAllProjects(client, options) {
 async function getLatestProjectData(client, options, projectID) {
     //var projectDataDocuments = getAllProjectData(client, options, projectID);
     var orderBy = [
-        ["timestamp", "desc"],
+        ["payerNumber", "desc"],
     ];
 
     var queryOptions = queryOptionsFindById(
