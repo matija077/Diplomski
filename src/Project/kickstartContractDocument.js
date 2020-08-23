@@ -12,9 +12,6 @@ project: {
         },
         {
             properties: [{ "funds": "desc" }]
-        },
-        {
-            properties: [{ "timestamp": "desc" }]
         }
     ],
     properties: {
@@ -28,14 +25,37 @@ project: {
             type: "number",
             description: "funds gathered sofar"
         },
-        timestamp: {
-            $ref: "#/definitions/timestamp"
+        funders: {
+            type: "array",
+            description: "all funders",
+            items: {
+                type: "object",
+                properties: {
+                    payerID: {
+                        type: "string",
+                        description: "payer's ID",
+                        minLength: 42,
+                        maxLength: 42
+                    },
+                    timestamp: {
+                        $ref: "#/definitions/timestamp"
+                    },
+                    payerName: {
+                        type: "string",
+                        description: "payer's name",
+                        maxLength: 63,
+                    },
+                    payment: {
+                        type: "integer",
+                        description: "one payment"
+                    }
+                },
+                required: [
+                    "payerID", "payerName", "timestamp", "payment"
+                ],
+                additionalProperties: false,
+            }
         },
-        name: {
-            type: "string",
-            description: "payer's name",
-            maxLength: 63,
-        }
     },
     required: ["projectID", "funds"],
     additionalProperties: false,

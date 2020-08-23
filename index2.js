@@ -45,7 +45,7 @@ const identity1 = 'An3wozaNdgwd9aB5Z81MYkkFiuxzLNSiT9Xhko6N2zoB';
 const identity1Pub = 'AtlGKCJaHmc8gy8Eda32qhQu2mBTnnFsqu96qjHbimYi';
 const contractID1 = 'CCY5RGbq5yskFudxgHeWxSU8zQdwXuzgcZLC5csi9tTa';
 const contractID2 = '81sZbwhToSzaGnyJj6cGtyTfjvrmufTAtXatfTxDXWNa';
-const contractFIrst = '2nZJg1voCjJHFm7QFYU1hKsWVUgRJWtwK1m8gSnXCY2e';
+const contractFIrst = 'DR7pVX5odr451jDZoef2aKKQhZg4qBRBPnkVHU8N1QNg';
 
 const identity2 = '5Fn8KD8xeZcMQvY8LtDZpnj6Cx2g1BVGsCfMVgpYPZ8t';
 const identity2Pub = 'Asck9UXor8fUVb2ROld/23usOvSG9HhwmbrictDNIEoj';
@@ -196,17 +196,23 @@ async function flow(id) {
             hour:  date.getHours().toString()
         };
 
+        var payer = {
+            payerID: identity3,
+            timestamp: timestamp,
+            payerName: name3.data.label,
+            payment: 40,
+        };
+
         const projectProperties = new ProjectProperties(
             "1234567890111234567890123456789123456789012222",
-            46,
-            timestamp,
-            name2.data.label
+            80,
+            [payer, payer]
         );
         const projectOverviewProperties = new ProjectOverviewProperties(
             "3234567890111234567890123456789123456780",
             "Test",
-            12,
-            "Idemooo idemooooo",
+            20,
+            "testic  testickoo",
             timestamp,
             undefined,
             undefined,
@@ -226,17 +232,14 @@ async function flow(id) {
         id = identity3;
         let queryOptions = findById(id);
 
-        /*const arrayDocuments = await queryDocuments(
+        const arrayDocuments = await queryDocuments(
             client1.platform, documentLocatorProjectOverview, queryOptions);
         let createBatch = await createDocumentBatch(
-            client2.platform,
-            identity2Real,
+            client3.platform,
+            identity3Real,
             projectProperties,
             documentLocatorProject
         );
-        arrayDocuments[0].data.name = "Test";
-        arrayDocuments[0].data.goals = undefined;
-        arrayDocuments[0].data.rewards = undefined;
 
         console.log(arrayDocuments);
         let replaceBatch = createReplaceBatch(
@@ -244,14 +247,14 @@ async function flow(id) {
         );
         let deleteBatch = createDeleteBatch(
             arrayDocuments[3]
-        );*/
+        );
         //console.log(createBatch);
         //replaceBatch.replace[0].data.description = "Halelujaaaaaa jso pdoataka";
-        /*await submitDocument(
+        await submitDocument(
             client3.platform,
-            replaceBatch,
+            createBatch,
             identity3Real,
-        );*/
+        );
 
         //queryOptions = findById(id);
 

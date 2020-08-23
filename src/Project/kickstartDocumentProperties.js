@@ -35,12 +35,11 @@ ProjectOverviewProperties.prototype.constructor = ProjectOverviewProperties;
 Object.setPrototypeOf(ProjectOverviewProperties, KickstartDocumentProperties);
 
 
-function ProjectProperties(id,funds = 0, timestamp, name) {
+function ProjectProperties(id,funds = 0, timestamp, name, payers) {
     KickstartDocumentProperties.call(this, id);
 
     this.funds = funds;
-    this.timestamp = timestamp;
-    this.name = name;
+    this.funders = payers;
 }
 
 ProjectProperties.prototype = Object.create(

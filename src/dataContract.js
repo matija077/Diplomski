@@ -9,6 +9,8 @@ async function dataContract(platform, identityID, document, definitions) {
             contract.setDefinitions(definitions);
         }
 
+        console.log(definitions);
+
         const validationResult = await platform.dpp.dataContract.validate(contract);
         if (validationResult.isValid()) {
             console.log("passed");
