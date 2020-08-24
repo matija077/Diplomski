@@ -1,5 +1,6 @@
 async function submitDocument(
     platform, documentBatch, identity) {
+        var result;
     try {
         /*let documentBatch;
         if (replace) {
@@ -12,12 +13,15 @@ async function submitDocument(
 
         await platform.documents.broadcast(documentBatch, identity);
         console.log("uspjeh kreiranaj dokumenata");
+        result = "uspjeh kreiranja dokumenta";
     }
     catch(error) {
         console.log("g=zgrejsih");
         console.log(error);
         throw(error);
     }
+
+    return result;
 }
 
 module.exports = submitDocument;

@@ -1,4 +1,4 @@
-var {get} = require('./helperFunctionsProject')
+var {get, update} = require('./helperFunctionsProject')
 var {queryOptionsFindById} = require('../Project/queryOptions');
 
 async function getAllProjects(client, options) {
@@ -41,8 +41,30 @@ async function getAllProjectData(client, options, projectID){
     );
 }
 
+/**
+ * can't make unique name or id field inside an array so
+ * passing it here is the only options
+ * @param {} client
+ * @param {*} options
+ * @param {*} projectID
+ */
+async function fundProject(client, options, projectID, payment) {
+    var latestProjectDetails = await getLatestProjectData(
+        client, options, projectID);
+
+    console.log(payment);
+
+    /*return await update(
+        client,
+        options.documentLocatorProject,
+        latestProjectDetails
+    );*/
+    return latestProjectDetails;
+}
+
 module.exports = {
     getAllProjects,
     getLatestProjectData,
-    getAllProjectData
+    getAllProjectData,
+    fundProject
 };

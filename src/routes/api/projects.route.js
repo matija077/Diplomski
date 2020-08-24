@@ -50,13 +50,17 @@ function projectsRoute(app, {clients, options}) {
         });
     })
 
-    app.post('/projects', (req, res) => {
-        console.log(app._router.stack);
-        console.log(req.body);
-        var {id} = req.body.id;
-        id = identity1;
+    app.post('/projects/project/fund/:projectID/:userIndex', (req, res) => {
+        var projectID = req.params.projectID;
+        var userIndex = req.params.userIndex;
+        var payment = req.body.payment;
 
-        var dash = require(global.__basedir + '/index2')(id).then(
+        projectsApi.fundProject(
+            clients[userIndex],
+            options,
+            projectID,
+            payment
+        ).then(
             function resolved(result) {
                 require(global.__basedir + '/src/cycle');
                 result = JSON.decycle(result);

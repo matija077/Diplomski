@@ -258,7 +258,7 @@ async function flow(id) {
             documentLocatorProject
         );
 
-        console.log(arrayDocuments);
+        //console.log(arrayDocuments);
         let replaceBatch = createReplaceBatch(
             arrayDocuments[0]
         );

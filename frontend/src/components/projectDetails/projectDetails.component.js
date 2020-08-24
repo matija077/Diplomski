@@ -60,11 +60,14 @@ class ProjectDetails extends React.Component {
                     </div>
                     <div className="payers">
                         {
-                            project.data.funders.map((funder, index) => (
-                                <div>
-                                    {index}
-                                </div>
-                            ))
+                            project.data.funders.length > 0 ?
+                                project.data.funders.map((funder, index) => (
+                                    <div>
+                                        {index}
+                                    </div>
+                                ))
+                            :
+                                null
                         }
                     </div>
                 </div>

@@ -32,6 +32,16 @@ function ProjectOverview({project}) {
             <textarea readOnly className="description">
                 {project.data.description}
             </textarea>
+            {
+                project.data.rewards.length > 0 ?
+                    project.data.rewards.map((reward, index) => (
+                        <div>
+                            {index}
+                        </div>
+                    ))
+                :
+                    null
+            }
         </div>
     );
 }
