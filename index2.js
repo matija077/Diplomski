@@ -267,11 +267,11 @@ async function flow(id) {
         );
         //console.log(createBatch);
         //replaceBatch.replace[0].data.description = "Halelujaaaaaa jso pdoataka";
-        await submitDocument(
+        /*await submitDocument(
             client3.platform,
             createBatch,
             identity3Real,
-        );
+        );*/
 
         //queryOptions = findById(id);
 
