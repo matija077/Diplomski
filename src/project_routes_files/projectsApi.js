@@ -1,4 +1,4 @@
-var {get, update} = require('./helperFunctionsProject')
+var {get, update, addNewPayer} = require('./helperFunctionsProject')
 var {queryOptionsFindById} = require('../Project/queryOptions');
 
 async function getAllProjects(client, options) {
@@ -51,8 +51,9 @@ async function getAllProjectData(client, options, projectID){
 async function fundProject(client, options, projectID, payment) {
     var latestProjectDetails = await getLatestProjectData(
         client, options, projectID);
+    console.log(latestProjectDetails[0]);
 
-    console.log(payment);
+    latestProjectDetails = addNewPayer(client, latestProjectDetails, payment);
 
     /*return await update(
         client,

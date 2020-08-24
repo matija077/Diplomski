@@ -189,7 +189,7 @@ async function flow(id) {
         const date = new Date();
         var timestamp = {
             day: date.getDate().toString(),
-            month: date.getMonth().toString(),
+            month: (date.getMonth() + 1).toString(),
             year: date.getFullYear().toString(),
             second: date.getSeconds().toString(),
             minute: date.getMinutes().toString(),
@@ -286,6 +286,9 @@ async function flow(id) {
         client1.identityReal = identity1Real;
         client2.identityReal = identity2Real;
         client3.identityReal = identity3Real;
+        client1.name = name1;
+        client2.name = name2;
+        client3.name = name3;
         const options = {
             documentLocatorProject: documentLocatorProject,
             documentLocatorProjectOverview: documentLocatorProjectOverview,
