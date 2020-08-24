@@ -14,7 +14,8 @@ project: {
             properties: [{ "funds": "desc" }]
         },
         {
-            properties: [{ "payerNumber": "desc" }]
+            properties: [{ "payerNumber": "desc" }],
+            "unique": true,
         }
     ],
     properties: {
@@ -55,7 +56,13 @@ project: {
                     payment: {
                         type: "integer",
                         description: "one payment"
-                    }
+                    },
+                    rewardName:{
+                        type: "string",
+                        minLength: 2,
+                        maxLength: 100,
+                        description: "reward name"
+                    },
                 },
                 required: [
                     "payerID", "payerName", "timestamp", "payment"
@@ -162,17 +169,13 @@ projectOverview: {
                         maxLength: 400,
                         description: "reward description"
                     },
-                    users: {
-                        type: "array",
-                        items: {
-                            type: "string",
-                            minLength: 34,
-                            maxLength: 34,
-                        }
+                    price: {
+                        type: "integer",
+                        description: "price for reward"
                     }
                 },
                 required: [
-                    "name", "description"
+                    "name", "description", "price"
                 ],
                 additionalProperties: false,
             }

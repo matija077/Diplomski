@@ -45,7 +45,7 @@ const identity1 = 'An3wozaNdgwd9aB5Z81MYkkFiuxzLNSiT9Xhko6N2zoB';
 const identity1Pub = 'AtlGKCJaHmc8gy8Eda32qhQu2mBTnnFsqu96qjHbimYi';
 const contractID1 = 'CCY5RGbq5yskFudxgHeWxSU8zQdwXuzgcZLC5csi9tTa';
 const contractID2 = '81sZbwhToSzaGnyJj6cGtyTfjvrmufTAtXatfTxDXWNa';
-const contractFIrst = 'QCPL17s5QpCDPY6KECbhv2aZaXaa8dyh1BRpJ7hncqh';
+const contractFIrst = 'C2BmGjkiqkmtmFu6sKKCfmBtiKWN4Z8JRPaDwt1RUZwo';
 
 const identity2 = '5Fn8KD8xeZcMQvY8LtDZpnj6Cx2g1BVGsCfMVgpYPZ8t';
 const identity2Pub = 'Asck9UXor8fUVb2ROld/23usOvSG9HhwmbrictDNIEoj';
@@ -143,7 +143,7 @@ async function flow(id) {
         //console.log(name1);
 
         // contracts
-       /* await dataContract(client1.platform, identity1, kickstartContractDocument,
+        /*await dataContract(client1.platform, identity1, kickstartContractDocument,
             kickstartDefinitions);*/
         //await dataContract(client2.platform, identity2, contractDocuments2);
         //console.log(contractDocuments2);
@@ -196,30 +196,44 @@ async function flow(id) {
             hour:  date.getHours().toString()
         };
 
+        var rewards = [
+            {
+                name: "basic",
+                description: "basic reward",
+                price: 10
+            },
+            {
+                name: "upgrade",
+                description: "better reward",
+                price: 20
+            }
+        ];
+
         var payer = {
             payerID: identity3,
             timestamp: timestamp,
             payerName: name3.data.label,
-            payment: 40,
+            payment: 10,
+            rewardName: "basic"
         };
 
         console.log(payer.payerID.length);
 
         const projectProperties = new ProjectProperties(
             "3234567890111234567890123456789123456789012222",
-            120,
+            20,
             2,
             [payer, payer]
         );
         const projectOverviewProperties = new ProjectOverviewProperties(
-            "3234567890111234567890123456789123456780",
-            "Test",
-            40,
-            "testic  testiiic",
+            "1234567890111234567890123456789123456780",
+            "Diplomski",
+            20,
+            "idemooo   idemooooo",
             timestamp,
             undefined,
-            undefined,
-            name3.data.label
+            rewards,
+            name1.data.label
         );
 
         const nameDocumentLocator = "dpns.domain";
@@ -253,11 +267,11 @@ async function flow(id) {
         );
         //console.log(createBatch);
         //replaceBatch.replace[0].data.description = "Halelujaaaaaa jso pdoataka";
-        /*await submitDocument(
+        await submitDocument(
             client3.platform,
             createBatch,
             identity3Real,
-        );*/
+        );
 
         //queryOptions = findById(id);
 
