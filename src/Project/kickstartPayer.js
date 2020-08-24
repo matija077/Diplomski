@@ -1,9 +1,10 @@
-function KickstartPayer(payerID, payerName, payment, rewardName) {
+function KickstartPayer(payerID, payerName, payment, rewardName, transactionID) {
     this.payerID = payerID;
     this.timestamp = createTimestamp();
     this.payerName = payerName;
     this.payment = payment;
     this.rewardName = rewardName;
+    this.transactionID = transactionID;
 }
 
 function createTimestamp() {

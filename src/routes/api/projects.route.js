@@ -5,7 +5,6 @@ function projectsRoute(app, {clients, options}) {
     var projectsApi = require(global.__basedir + "/src/project_routes_files/projectsApi");
 
     app.get('/projects', (req, res) => {
-        console.log(app._router.stack);
         projectsApi.getAllProjects(clients[0], options).then(
             function resolved(result) {
                 require(global.__basedir + '/src/cycle');

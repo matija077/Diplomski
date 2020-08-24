@@ -14,8 +14,10 @@ project: {
             properties: [{ "funds": "desc" }]
         },
         {
-            properties: [{ "payerNumber": "desc" }],
-            "unique": true,
+            properties: [
+                { "projectID": "asc"},
+                { "payerNumber": "desc" }],
+            "unique": true
         }
     ],
     properties: {
@@ -63,9 +65,13 @@ project: {
                         maxLength: 100,
                         description: "reward name"
                     },
+                    transactionID: {
+                        type: "string",
+                        description: "transaction ID"
+                    }
                 },
                 required: [
-                    "payerID", "payerName", "timestamp", "payment"
+                    "payerID", "payerName", "timestamp", "payment", "transactionID"
                 ],
                 additionalProperties: false,
             }

@@ -45,7 +45,7 @@ const identity1 = 'An3wozaNdgwd9aB5Z81MYkkFiuxzLNSiT9Xhko6N2zoB';
 const identity1Pub = 'AtlGKCJaHmc8gy8Eda32qhQu2mBTnnFsqu96qjHbimYi';
 const contractID1 = 'CCY5RGbq5yskFudxgHeWxSU8zQdwXuzgcZLC5csi9tTa';
 const contractID2 = '81sZbwhToSzaGnyJj6cGtyTfjvrmufTAtXatfTxDXWNa';
-const contractFIrst = 'C2BmGjkiqkmtmFu6sKKCfmBtiKWN4Z8JRPaDwt1RUZwo';
+const contractFIrst = '6Zq5fbxSr3THVJfXa8y2VSaQSM58ASEwCuTDosGGAPf1';
 
 const identity2 = '5Fn8KD8xeZcMQvY8LtDZpnj6Cx2g1BVGsCfMVgpYPZ8t';
 const identity2Pub = 'Asck9UXor8fUVb2ROld/23usOvSG9HhwmbrictDNIEoj';
@@ -114,8 +114,9 @@ async function flow(id) {
         const id2 = await client2.platform.identities.get(identity2);
         console.log(id2);*/
         //console.log(client1.getDAPIClient().platform);
-        //console.log(client1.wallet.accounts[0].getTotalBalance());
-        //console.log(client2.wallet.accounts[0].getTotalBalance());
+       /* console.log(client1.wallet.accounts[0].getTotalBalance());
+        console.log(client2.wallet.accounts[0].getTotalBalance());
+        console.log(client.wallet.accounts[0].getTotalBalance());*/
         /*const id2 = await client1.platform.getIdentityIdByFirstPublicKey(
             client1.wallet.HDPrivateKey.xpubkey
         );*/
@@ -214,7 +215,8 @@ async function flow(id) {
             timestamp: timestamp,
             payerName: name3.data.label,
             payment: 10,
-            rewardName: "basic"
+            rewardName: "basic",
+            transactionID: "testID",
         };
 
         console.log(payer.payerID.length);
@@ -223,17 +225,17 @@ async function flow(id) {
             "3234567890111234567890123456789123456789012222",
             20,
             2,
-            [payer, payer]
+            [payer,]
         );
         const projectOverviewProperties = new ProjectOverviewProperties(
-            "1234567890111234567890123456789123456780",
-            "Diplomski",
-            20,
-            "idemooo   idemooooo",
+            "3234567890111234567890123456789123456780",
+            "Test",
+            10,
+            "testic   testiccc",
             timestamp,
             undefined,
             rewards,
-            name1.data.label
+            name3.data.label
         );
 
         const nameDocumentLocator = "dpns.domain";
@@ -250,12 +252,12 @@ async function flow(id) {
         let queryOptions = findById(id);
 
         const arrayDocuments = await queryDocuments(
-            client1.platform, documentLocatorProjectOverview, queryOptions);
+            client2.platform, documentLocatorProject);
         let createBatch = await createDocumentBatch(
             client3.platform,
             identity3Real,
-            projectProperties,
-            documentLocatorProject
+            projectOverviewProperties,
+            documentLocatorProjectOverview
         );
 
         //console.log(arrayDocuments);
@@ -263,14 +265,14 @@ async function flow(id) {
             arrayDocuments[0]
         );
         let deleteBatch = createDeleteBatch(
-            arrayDocuments[3]
+            arrayDocuments[0]
         );
         //console.log(createBatch);
         //replaceBatch.replace[0].data.description = "Halelujaaaaaa jso pdoataka";
         /*await submitDocument(
-            client3.platform,
-            createBatch,
-            identity3Real,
+            client2.platform,
+            deleteBatch,
+            identity2Real,
         );*/
 
         //queryOptions = findById(id);
@@ -293,8 +295,14 @@ async function flow(id) {
             documentLocatorProject: documentLocatorProject,
             documentLocatorProjectOverview: documentLocatorProjectOverview,
             documentTypeProject: documentTypeProject,
-            documentTypeProjectOverview: documentTypeProjectOverview
+            documentTypeProjectOverview: documentTypeProjectOverview,
+            addresses: [
+                client1.wallet.accounts[0].getUnusedAddress().address,
+                client2.wallet.accounts[0].getUnusedAddress().address,
+                client3.wallet.accounts[0].getUnusedAddress().address
+            ]
         };
+        //console.log(await client1.platform.identities.get(identity3));
         const clients = [client1, client2, client3];
         //console.log(await client1.platform.names.get('treci'));
         return {clients, options};

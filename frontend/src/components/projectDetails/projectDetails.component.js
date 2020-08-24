@@ -23,12 +23,13 @@ class ProjectDetails extends React.Component {
             return response.json();
         })
         .then(function jsonData(data) {
-            console.log(data);
+            var newState = {
+                fetched: true,
+                project: data
+            };
+
             this.setState(
-                {
-                    project: data[0],
-                    fetched: true,
-                },
+                newState,
                 () => console.log(this.state)
             );
         }.bind(this))
@@ -40,37 +41,50 @@ class ProjectDetails extends React.Component {
 
     render() {
         var {project, fetched} = this.state;
+        var render = false;
+        if (project) {
+            if (project.length > 0) {
+                render = true;
+                project = project[0];
+            }
+        }
+
+        console.log(render);
         console.log(project);
 
         return (
             <div className="project-details-placeholder">
                 {fetched ? (
-                <div className="project-details">
-                    <div className="data-holder">
-                        <span className="name">project ID</span>
-                        <span className="number">{project.data.projectID}</span>
+                render ?  (
+                    <div className="project-details">
+                        <div className="data-holder">
+                            <span className="name">project ID</span>
+                            <span className="number">{project.data.projectID}</span>
+                        </div>
+                        <div className="data-holder">
+                            <span className="name">project funds</span>
+                            <span className="number">{project.data.funds}</span>
+                        </div>
+                        <div className="data-holder">
+                            <span className="name">number of donations</span>
+                            <span className="number">{project.data.payerNumber}</span>
+                        </div>
+                        <div className="payers">
+                            {
+                                project.data.funders.length > 0 ?
+                                    project.data.funders.map((funder, index) => (
+                                        <div>
+                                            {index}
+                                        </div>
+                                    ))
+                                :
+                                    null
+                            }
+                        </div>
                     </div>
-                    <div className="data-holder">
-                        <span className="name">project funds</span>
-                        <span className="number">{project.data.funds}</span>
-                    </div>
-                    <div className="data-holder">
-                        <span className="name">number of donations</span>
-                        <span className="number">{project.data.payerNumber}</span>
-                    </div>
-                    <div className="payers">
-                        {
-                            project.data.funders.length > 0 ?
-                                project.data.funders.map((funder, index) => (
-                                    <div>
-                                        {index}
-                                    </div>
-                                ))
-                            :
-                                null
-                        }
-                    </div>
-                </div>
+                    )
+                :
+                    null
                 ) :
                 <p> ckeaj</p>
                 }

@@ -17,15 +17,22 @@ async function get(client, option, queryOptions) {
 }
 
 async function update(client, options, latestProjectData) {
-    var createReplaceBatch = require('../createReplaceBatch');
+    var createDocumentBatch = require('../createDocumentBatch');
     var submitDocument = require('../submitDocument');
 
-    var replaceBatch = createReplaceBatch(latestProjectData);
+    var documentBatch = await createDocumentBatch(
+        client.platform,
+        client.identityReal,
+        latestProjectData,
+        options.documentLocatorProject
+    );
+
+    console.log(documentBatch.data);
 
     try {
-        submitDocument(
+        return submitDocument(
             client.platform,
-            replaceBatch,
+            documentBatch,
             client.identityReal
         );
     } catch(error) {
@@ -34,22 +41,44 @@ async function update(client, options, latestProjectData) {
     }
 }
 
-function addNewPayer(client, latestProjectDetails, payment) {
+function addNewPayer(client, latestProjectDetails, payment, transactionID) {
     var {KickstartPayer} = require('../Project/kickstartPayer');
-    latestProjectDetails = latestProjectDetails[0];
+    latestProjectDetails = latestProjectDetails;
 
-    latestProjectDetails.data.funds +=  payment.payment;
-    latestProjectDetails.data.payerNumber += 1;
-    latestProjectDetails.data.funders.push(
+    latestProjectDetails.funds +=  payment.payment;
+    latestProjectDetails.payerNumber += 1;
+    latestProjectDetails.funders.push(
         new KickstartPayer(
             client.identityReal.id,
             client.name.data.label,
             payment.payment,
-            payment.name
+            payment.name,
+            transactionID
         )
     );
 
     return latestProjectDetails;
+}
+
+async function transferFunds(client, projectOwnerIdentity, payment, address) {
+    var createTransaction = require('../../src/createTransaction');
+    //console.log(projectOwnerIdentity);
+    try {
+        const identity = await client.platform.identities.get(projectOwnerIdentity);
+        const publicKey = identity.publicKeys[0].data;
+        //const address = client.wallet.accounts[0].getUnusedAddress().address;
+        const account = client.wallet.accounts[0];
+
+
+         return createTransaction(
+            account,
+            address,
+            payment
+        );
+    } catch(error) {
+        console.log(transferFunds.name);
+        throw error;
+    }
 }
 
 /**
@@ -103,5 +132,6 @@ function replace(object, keysToChange, values, options) {
 module.exports = {
     get,
     update,
-    addNewPayer
+    addNewPayer,
+    transferFunds
 };
