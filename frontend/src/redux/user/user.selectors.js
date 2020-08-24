@@ -8,3 +8,8 @@ export var selectCurrentUser = createSelector(
     [selectUser],
     (user) => user.currentUser
 );
+
+export var selectCurrentUserNumber = createSelector(
+    [selectUser],
+    (user) => user.userNumber
+)

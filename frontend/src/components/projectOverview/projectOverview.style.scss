@@ -13,5 +13,14 @@
 
     }
 
+    .rewards-placeholder {
+        display: flex;
+
+        .rewards {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
 
 }
