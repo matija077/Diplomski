@@ -13,7 +13,7 @@
   },
   "scripts": {
     "test": "test",
-    "start": "server.js",
+    "start": "server",
     "start-server": "nodemon server.js",
     "heroku-prebuild": "cd frontend && npm install && npm run-script build && cd .."
   },
