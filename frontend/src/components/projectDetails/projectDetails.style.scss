@@ -6,4 +6,18 @@
         display: flex;
         justify-content: space-between;
     }
+
+    .payers {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .payers-heading {
+        text-align: center;
+
+    }
+
+    .payer-index {
+        text-align: center;
+    }
 }

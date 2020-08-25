@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 
 import './projectDetails.style.scss';
 
+import Funder from '../funder/funder.component';
+
 class ProjectDetails extends React.Component {
     constructor(props) {
         super(props)
@@ -69,12 +71,14 @@ class ProjectDetails extends React.Component {
                             <span className="name">number of donations</span>
                             <span className="number">{project.data.payerNumber}</span>
                         </div>
-                        <div className="payers">
+                        <div className="payers-placeholder">
+                            <h2 className="payers-heading">Funders</h2>
                             {
                                 project.data.funders.length > 0 ?
                                     project.data.funders.map((funder, index) => (
-                                        <div>
-                                            {index}
+                                        <div className="payers" >
+                                            <p className="payer-index">{index}</p>
+                                            <Funder key={funder.payerID} funder={funder}></Funder>
                                         </div>
                                     ))
                                 :

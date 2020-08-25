@@ -5,3 +5,7 @@ body {
 a {
 
 }
+
+.name {
+  font-weight: bold;
+}

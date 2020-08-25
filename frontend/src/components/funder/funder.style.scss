@@ -1,0 +1,9 @@
+.funder {
+    display: flex;
+    flex-direction: column;
+
+    .data-holder {
+        display: flex;
+        justify-content: space-between;
+    }
+}
