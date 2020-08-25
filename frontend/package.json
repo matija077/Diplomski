@@ -13,6 +13,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "redux": "^4.0.5",
+    "redux-logger": "^3.0.6",
     "reselect": "^4.0.0"
   },
   "scripts": {
@@ -38,7 +39,6 @@
   },
   "proxy": "http://localhost:3000",
   "devDependencies": {
-    "redux-devtools": "^3.6.1",
-    "redux-logger": "^3.0.6"
+    "redux-devtools": "^3.6.1"
   }
 }
