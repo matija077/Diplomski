@@ -12,8 +12,12 @@ const port = process.env.port || 3000;
 /**
  * how to serve statci files
  */
+/*if (process.env === 'production') {
+    app.use(express.static(__dirname  + '/frontend' + '/build'));
+} else {
+    app.use(express.static(__dirname  + '/frontend' + '/public'));
+}*/
 app.use(express.static(__dirname  + '/frontend' + '/build'));
-
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
