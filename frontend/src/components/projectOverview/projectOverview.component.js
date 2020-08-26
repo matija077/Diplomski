@@ -40,12 +40,12 @@ function ProjectOverview({project, currentUserIndex}) {
                     pathname: `/projects/${project.data.projectID}`
                     }}
             >{ project.data.name }</Link>
-            <div>
+            <div className="data-holder">
                 <span className="name">Project Owner</span>
                 <span className="owner">{project.data.ownerName}</span>
             </div>
 
-            <div>
+            <div className="data-holder">
                 <span className="name">Deadline</span>
                 <span className="number"> { project.data.deadline }</span>
             </div>

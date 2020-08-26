@@ -1,6 +1,12 @@
 .project-properties {
     display: flex;
     flex-direction: column;
+    margin: 0px 0px 10px;
+
+    .title {
+        font-weight: bold;
+        text-align: center;
+    }
 
     .data-holder {
         display: flex;
@@ -19,6 +25,7 @@
         .rewards {
             display: flex;
             flex-direction: column;
+            padding: 0px 2px 2px 0px;
         }
     }
 
