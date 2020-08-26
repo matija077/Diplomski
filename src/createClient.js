@@ -1,4 +1,4 @@
-var Dash = require('Dash');
+var Dash = require('dash');
 
 async function createClient(clientOps) {
     var client = new Dash.Client(clientOps);
