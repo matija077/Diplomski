@@ -15,7 +15,7 @@
     "test": "test",
     "start": "node server.js",
     "start-server": "nodemon server.js",
-    "heroku-prebuild": "cd frontend && npm install && npm run-script build && cd .."
+    "heroku-postbuild": "cd frontend && npm install && npm run-script build && cd .."
   },
   "repository": {
     "type": "git",
