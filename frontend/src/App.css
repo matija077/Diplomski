@@ -2,8 +2,9 @@ body {
   font-family: 'Crimson Text', serif;
 }
 
-a {
-
+a, a:hover, a:focus, a:active {
+  text-decoration: none;
+  color: inherit;
 }
 
 .name {

@@ -228,14 +228,14 @@ async function flow(id) {
             [payer,]
         );
         const projectOverviewProperties = new ProjectOverviewProperties(
-            "3234567890111234567890123456789123456780",
-            "Test",
-            10,
-            "testic   testiccc",
+            "2234567890111234567890123456789123456780",
+            "Izrada diplomskog rada",
+            20,
+            "Izradujem diplomski rad po mjeri",
             timestamp,
             undefined,
             rewards,
-            name3.data.label
+            name2.data.label
         );
 
         const nameDocumentLocator = "dpns.domain";
@@ -254,8 +254,8 @@ async function flow(id) {
         const arrayDocuments = await queryDocuments(
             client2.platform, documentLocatorProject);
         let createBatch = await createDocumentBatch(
-            client3.platform,
-            identity3Real,
+            client2.platform,
+            identity2Real,
             projectOverviewProperties,
             documentLocatorProjectOverview
         );
@@ -269,11 +269,11 @@ async function flow(id) {
         );
         //console.log(createBatch);
         //replaceBatch.replace[0].data.description = "Halelujaaaaaa jso pdoataka";
-        /*await submitDocument(
+        await submitDocument(
             client2.platform,
-            deleteBatch,
+            createBatch,
             identity2Real,
-        );*/
+        );
 
         //queryOptions = findById(id);
 

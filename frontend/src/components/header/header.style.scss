@@ -11,9 +11,9 @@
     display: flex;
     justify-content: flex-end;
 
-        .option {
+        .option, .option-user {
             cursor: pointer;
-            padding: 10xp 15px;
+            padding: 0px 2px;
         }
     }
 }
