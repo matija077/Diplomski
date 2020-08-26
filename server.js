@@ -7,7 +7,7 @@ var app = express();
 // set base directory into global objects for easy access
 global.__basedir = __dirname;
 
-const port = process.env.port || 3000;
+const port = process.env.PORT || 3000;
 
 /**
  * how to serve statci files
