@@ -1,6 +1,7 @@
 async function createTransaction(account, address, money) {
     var result;
 
+    console.log(money);
     try {
         const transaction = account.createTransaction({
             recipient: address,

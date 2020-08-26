@@ -1,0 +1,26 @@
+.project-properties {
+    display: flex;
+    flex-direction: column;
+
+    .data-holder {
+        display: flex;
+        justify-content: space-between;
+
+        .number {
+            margin-left: auto;
+            text-align: right;
+        }
+
+    }
+
+    .rewards-placeholder {
+        display: flex;
+
+        .rewards {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+
+}

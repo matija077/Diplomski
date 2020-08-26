@@ -4,12 +4,18 @@
   "description": "kickstart for students using Dash",
   "main": "index.js",
   "dependencies": {
+    "cors": "^2.8.5",
     "dash": "^3.13.4",
     "express": "^4.17.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "start": "node server.js",
+    "start-server": "nodemon server.js",
+    "heroku-postbuild": "cd frontend && npm install && npm run-script build && cd .. && npm install"
   },
   "repository": {
     "type": "git",
