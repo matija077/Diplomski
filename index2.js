@@ -251,7 +251,7 @@ async function flow(id) {
         id = identity3;
         let queryOptions = findById(id);
 
-        const arrayDocuments = await queryDocuments(
+        /*const arrayDocuments = await queryDocuments(
             client2.platform, documentLocatorProject);
         let createBatch = await createDocumentBatch(
             client2.platform,
@@ -266,14 +266,14 @@ async function flow(id) {
         );
         let deleteBatch = createDeleteBatch(
             arrayDocuments[0]
-        );
+        );*/
         //console.log(createBatch);
         //replaceBatch.replace[0].data.description = "Halelujaaaaaa jso pdoataka";
-        await submitDocument(
+        /*await submitDocument(
             client2.platform,
             createBatch,
             identity2Real,
-        );
+        );*/
 
         //queryOptions = findById(id);
 
