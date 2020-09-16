@@ -17,7 +17,7 @@ var {
     ProjectProperties: ProjectPropertiesOld
 } = require('./src/kickstartDocumentProperties2');
 var queryDocuments = require('./src/queryDocuments.js');
-var {queryOptionsFindById: findById} = require('./src/Project/queryOptions');
+var {queryOptionsFindById: findById, queryOptionsGetAll: all} = require('./src/Project/queryOptions');
 var CreateDocumentBatch = require('./src/createDocumentBatch');
 var createReplaceBatch = require('./src/createReplaceBatch');
 var createDeleteBatch = require('./src/createDeleteBatch');
@@ -33,13 +33,33 @@ var {
     ProjectProperties
 } = require('./src/Project/kickstartDocumentProperties');
 
-const mnemonic1 = 'adult depart crazy royal rabbit twist wool inform top provide push dog';
-const mnemonic2 = 'source beauty atom lift salute giraffe indoor yellow manual minor opinion magic';
-const mnemonic3 = 'shield during repair arrow carpet canal curious pistol radio inmate iron glare';
+var mnemonic1 = 'adult depart crazy royal rabbit twist wool inform top provide push dog';
+var mnemonic2 = 'source beauty atom lift salute giraffe indoor yellow manual minor opinion magic';
+var mnemonic3 = 'shield during repair arrow carpet canal curious pistol radio inmate iron glare';
 
-const address1 = 'yfJKpnUJWs5o9mt6jCoL5aDBvsYXHj6yvC';
-const address2 = 'ydzQ3dse33y67tGJtuSZGMWHZubgh2zHrh';
-const adresss3 = 'yShw5FSv6NxgUm5S4D6JPXkHGm78Jqc7F9';
+/*mnemonic1 = 'language hybrid apology amount frog alpha monkey crucial apart guess morning choose';
+mnemonic2 = 'thank stay dynamic affair jacket assist fruit top owner update twist olympic';
+mnemonic3 = 'all salt monitor pledge bargain success admit horn slight couple bacon envelope';*/
+/*mnemonic1 = 'mom elephant online slogan equip try exit fluid right aware fabric decade';
+mnemonic2 = 'vivid rural balcony pattern write trend family need urge near captain wonder';
+mnemonic3 = 'symbol charge horse run century present provide six pencil broom giggle future';*/
+
+
+
+var address1 = 'yfJKpnUJWs5o9mt6jCoL5aDBvsYXHj6yvC';
+var address2 = 'ydzQ3dse33y67tGJtuSZGMWHZubgh2zHrh';
+var adresss3 = 'yShw5FSv6NxgUm5S4D6JPXkHGm78Jqc7F9';
+
+
+/*address2 = 'yUkoxgUdZrZV4cdQMzcE5uGCJMe7Ud7Qw2';
+address3 = 'yjJeHd3Ejrr39masKHYWcKfBLqv4b4H6Ng';*/
+/*address1 = 'yPZ5jR9SerZcVQSYN2yLydDXuxx7dUeAWo';
+address2 = 'yff1rETi3khScV8ocgP4rG21GNRUrDf5b5';
+address3 = 'yN5T8XWfXnbVUZV8XqKzdDzv9Fu5WUyo9S';*/
+/*address1 = 'yTigPjsd4m9HANmtx7viM2XmsxUdbaxrTf';
+address2 = 'yPZ2sAN2jkMbJFjuhCaTxb95rT9VqM4zwt';
+address3 = 'yMfxUNNRFVnMNBTb2WKx1YaXvzysf3EDBb';*/
+
 
 const identity1 = 'An3wozaNdgwd9aB5Z81MYkkFiuxzLNSiT9Xhko6N2zoB';
 const identity1Pub = 'AtlGKCJaHmc8gy8Eda32qhQu2mBTnnFsqu96qjHbimYi';
@@ -59,13 +79,17 @@ const KICKSTART_APPLICATION_NAME = 'kickstartContract';
 var clientOps2 = new ClientOps();
 var clientOps3 = new ClientOps();
 
-/*createClient(clientOps1).then(function clientCreated(result) {
+createClient(clientOps1).then(function clientCreated(result) {
     console.log(clientOps1);
+});
+createClient(clientOps2).then(function clientCreated(result) {
+    console.log(clientOps2);
 });
 createClient(clientOps3).then(function clientCreated(result) {
     console.log(clientOps3);
 });*/
 var dpnsContractId = "FiBkhut4LFPMJqDWbZrxVeT6Mr6LsH3mTNTSSHJY2ape";
+dpnsContractId = '566vcJkmebVCAb2Dkj2yVMSgGFcsshupnQqtsz1RFbcy';
 
 var clientOps1 = new ClientOps(
     mnemonic1, KICKSTART_APPLICATION_NAME, contractFIrst, dpnsContractId
@@ -92,36 +116,53 @@ async function flow(id) {
             createWallet(client3)
         ]);
         //await Promise.all([client1.isReady(), client2.isReady()]);
-        /*var wallet1 = wallets[0];
+        var wallet1 = wallets[0];
         var wallet2 = wallets[1];
         //console.log("dodem tu");
-        const acc = await client3.wallet.getAccount();
-        //await client2.wallet.getAccount();
+        console.log((await client1.wallet.getAccount()).getUnusedAddress());
+        const acc = await client1.wallet.getAccount();
+        //await client1.wallet.getAccount();
         console.log(acc.getUnusedAddress());
+        const acc2 = await client2.wallet.getAccount();
+        console.log(acc2.getUnusedAddress());
+        const acc3 = await client3.wallet.getAccount();
+        console.log(acc3.getUnusedAddress());
         //console.log(client2.wallet.accounts[0].getUnusedAddress());*/
 
         //console.log(client1.wallet.accounts[0]);
         //console.log(client2.wallet.accounts[1]);
-        /*const result = await createTransaction(
+        /*const result2 = await createTransaction(
             client1.wallet.accounts[0],
             client2.wallet.accounts[0].getUnusedAddress().address,
-            100000000
-        );
-        console.log(result);*/
+            1000
+        );*/
+        /*const result2 = await createTransaction(
+            client1.wallet.accounts[0],
+            address2,
+            100000
+        );*/
+        const transaction = client1.wallet.accounts[0].createTransaction({
+            recipient: address2,
+            satoshis: 100000,
+        });
+        console.log(transaction);
         /*const platform1 = client1.platform;
         const id1 = await platform1.identities.get(identity1);
         console.log(id1);
         const id2 = await client2.platform.identities.get(identity2);
-        console.log(id2);*/
+        console.log(id2);
+        const id3 = await client3.platform.identities.get(identity3);
+        console.log(id3);*/
         //console.log(client1.getDAPIClient().platform);
-       /* console.log(client1.wallet.accounts[0].getTotalBalance());
+        /*console.log(client1.wallet.accounts[0].getTotalBalance());
         console.log(client2.wallet.accounts[0].getTotalBalance());
-        console.log(client.wallet.accounts[0].getTotalBalance());*/
+        console.log(client3.wallet.accounts[0].getTotalBalance());*/
         /*const id2 = await client1.platform.getIdentityIdByFirstPublicKey(
             client1.wallet.HDPrivateKey.xpubkey
         );*/
-        //topUpIdentity(identity1, 1000, client1);
-        //topUpIdentity(identity2, 1000, client2);
+        /*topUpIdentity(identity1, 1000, client1);
+        topUpIdentity(identity2, 1000, client2);
+        topUpIdentity(identity3, 1000, client3);*/
 
         //console.log(await createIdentity(client1));
         //console.log(await createIdentity(client2));
@@ -137,10 +178,10 @@ async function flow(id) {
             client3));*/
 
         //const platform1 = client1.platform;
-        const name1 = await client1.platform.names.get('prvi');
-        const name2 = await client2.platform.names.get('drugi');
-        const name3 = await client3.platform.names.get('treci');
-
+        /*const name1 = await client1.platform.names.resolve('prvi');
+        const name2 = await client2.platform.names.resolve('drugi');
+        const name3 = await client3.platform.names.resolve('treci');
+        */
         //console.log(name1);
 
         // contracts
@@ -249,9 +290,10 @@ async function flow(id) {
 
         //id = id || identity2;
         id = identity3;
-        let queryOptions = findById(id);
+        //let queryOptions = findById(id);
+        let queryOptions = all();
 
-        /*const arrayDocuments = await queryDocuments(
+        const arrayDocuments = await queryDocuments(
             client2.platform, documentLocatorProject);
         let createBatch = await createDocumentBatch(
             client2.platform,
@@ -260,13 +302,13 @@ async function flow(id) {
             documentLocatorProjectOverview
         );
 
-        //console.log(arrayDocuments);
+        console.log(arrayDocuments);
         let replaceBatch = createReplaceBatch(
             arrayDocuments[0]
         );
         let deleteBatch = createDeleteBatch(
             arrayDocuments[0]
-        );*/
+        );
         //console.log(createBatch);
         //replaceBatch.replace[0].data.description = "Halelujaaaaaa jso pdoataka";
         /*await submitDocument(

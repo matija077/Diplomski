@@ -3,7 +3,7 @@ function ClientOps(
     applicationName = null,
     contractId = null,
     dpnsContractId,
-    network = 'testnet',
+    network = 'evonet',
 ) {
     this.network = network;
     this.wallet = {
@@ -18,5 +18,11 @@ function ClientOps(
         }
     };
 };
+
+/**
+ * dpns: {
+            contractId: dpnsContractId
+        }
+ */
 
 module.exports = ClientOps;
